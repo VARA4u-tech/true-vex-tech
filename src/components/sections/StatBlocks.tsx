@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const STATS = [
   {
-    big: "9s",
+    big: "9secs",
     title: "Transactions every 9 seconds",
     body: "Our customers collectively have over R7.8 billion in spend-facility available. Using our platform for buy now, pay later and retail credit payments puts you on their radar.",
   },
@@ -18,6 +18,30 @@ const STATS = [
   },
 ];
 
+function AnimatedBigText({ text }: { text: string }) {
+  const chars = text.split("");
+  return (
+    <div className="font-display flex items-baseline text-7xl font-bold leading-none tracking-tight md:text-[160px]">
+      {chars.map((c, i) => (
+        <motion.span
+          key={i}
+          initial={{ y: "60%", opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{
+            duration: 0.7,
+            delay: i * 0.08,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="inline-block text-gradient"
+        >
+          {c}
+        </motion.span>
+      ))}
+    </div>
+  );
+}
+
 export function StatBlocks() {
   return (
     <section className="relative bg-card py-28 md:py-36">
@@ -31,10 +55,8 @@ export function StatBlocks() {
             transition={{ duration: 0.7, delay: i * 0.05 }}
             className="grid items-center gap-10 bg-card px-6 py-16 md:grid-cols-[1fr_1.4fr] md:gap-16 md:px-12 md:py-24"
           >
-            <div>
-              <div className="font-display text-7xl font-bold leading-none tracking-tight text-gradient md:text-[140px]">
-                {s.big}
-              </div>
+            <div className="overflow-hidden">
+              <AnimatedBigText text={s.big} />
             </div>
             <div>
               <h3 className="font-display text-3xl font-bold leading-tight md:text-5xl">
