@@ -10,7 +10,7 @@ export function MarketingCTA() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
           className="relative overflow-hidden rounded-[2rem] p-10 md:p-20"
-          style={{ background: "var(--gradient-primary)" }}
+          style={{ background: "var(--gradient-brand)" }}
         >
           <div
             aria-hidden
@@ -23,15 +23,15 @@ export function MarketingCTA() {
 
           <div className="relative grid items-end gap-10 md:grid-cols-[1.2fr_1fr]">
             <div>
-              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary-foreground/80">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-white/80">
                 Grow your business
               </span>
-              <h2 className="font-display mt-4 text-balance text-4xl font-bold leading-[1.02] text-primary-foreground md:text-6xl">
+              <h2 className="font-display mt-4 text-balance text-4xl font-bold leading-[1.02] text-white md:text-6xl">
                 Marketing solutions that put you in front of 2.6M shoppers
               </h2>
             </div>
             <div className="flex flex-col items-start gap-6 md:items-end">
-              <p className="max-w-md text-base text-primary-foreground/85 md:text-right">
+              <p className="max-w-md text-base text-white/90 md:text-right">
                 Get noticed by our community and turn interested browsers into
                 new customers — across email, app, and on-site placements.
               </p>
