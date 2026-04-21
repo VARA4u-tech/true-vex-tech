@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
+import { useRef } from "react";
 import { LampContainer } from "@/components/ui/lamp";
+import VariableProximity from "@/components/ui/VariableProximity";
 
 const STATS = [
   { value: "60%", label: "Data efficiency gain" },
@@ -10,9 +12,11 @@ const STATS = [
 const HEADLINE = "Innovate. Develop. Accelerate. Your future.".split(" ");
 
 export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
     <LampContainer className="pt-8 md:pt-12">
-      <div className="relative mx-auto max-w-7xl px-5 md:px-8">
+      <div ref={containerRef} className="relative mx-auto max-w-7xl px-5 md:px-8">
         <div className="mx-auto max-w-5xl text-center">
           <motion.span
             initial={{ opacity: 0, y: 8 }}
@@ -26,22 +30,14 @@ export function Hero() {
           </motion.span>
 
           <h1 className="font-display mt-6 text-balance text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-[88px]">
-            {HEADLINE.map((word, i) => (
-              <motion.span
-                key={`${word}-${i}`}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.05 * i,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="mr-3 inline-block md:mr-5"
-              >
-                {word === "Accelerate." ? <span className="text-gradient">{word}</span> : word}
-              </motion.span>
-            ))}
+            <VariableProximity
+              label="Innovate. Develop. Accelerate. Your future."
+              fromFontVariationSettings="'wght' 400, 'opsz' 9"
+              toFontVariationSettings="'wght' 1000, 'opsz' 40"
+              containerRef={containerRef}
+              radius={100}
+              falloff="linear"
+            />
           </h1>
 
           <motion.p

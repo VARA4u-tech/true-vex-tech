@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ScrollFloat from "@/components/ui/ScrollFloat";
 
 const QUOTES = [
   {
@@ -36,10 +37,17 @@ export function Testimonials() {
             <span className="text-xs uppercase tracking-[0.25em] text-primary">
               Success Stories
             </span>
-            <h2 className="font-display mt-4 text-balance text-4xl font-bold leading-[1.02] md:text-6xl">
-              Proven results for <br />
-              <span className="text-gradient">global enterprises</span>
-            </h2>
+            <ScrollFloat
+              animationDuration={1}
+              ease="back.inOut(2)"
+              scrollStart="center bottom+=50%"
+              scrollEnd="bottom bottom-=40%"
+              stagger={0.03}
+              containerClassName="mt-4"
+              textClassName="font-display text-balance text-4xl font-bold leading-[1.02] md:text-6xl"
+            >
+              Proven results for global enterprises
+            </ScrollFloat>
           </div>
           <div className="flex gap-2">
             <button

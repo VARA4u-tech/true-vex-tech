@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import ScrollFloat from "@/components/ui/ScrollFloat";
 
 const ITEMS = [
   {
@@ -25,9 +26,17 @@ export function OmniChannel() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="max-w-4xl">
           <span className="text-xs uppercase tracking-[0.25em] text-primary">Our Methodology</span>
-          <h2 className="font-display mt-4 text-balance text-5xl font-bold leading-[0.98] md:text-7xl">
-            Our <span className="text-gradient">Proven</span> Approach
-          </h2>
+          <ScrollFloat
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.03}
+            containerClassName="mt-4"
+            textClassName="font-display text-balance text-5xl font-bold leading-[0.98] md:text-7xl"
+          >
+            Our Proven Approach
+          </ScrollFloat>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
             We follow a structured, transparent process to turn your complex challenges into
             streamlined digital solutions.

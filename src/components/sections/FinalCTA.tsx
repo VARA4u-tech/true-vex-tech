@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import ScrollFloat from "@/components/ui/ScrollFloat";
 
 const MODELS = [
   {
@@ -28,15 +29,17 @@ export function FinalCTA() {
       />
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <div className="text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="font-display text-balance text-5xl font-bold leading-[0.98] md:text-7xl"
+          <ScrollFloat
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.03}
+            containerClassName="mt-0"
+            textClassName="font-display text-balance text-5xl font-bold leading-[0.98] md:text-7xl"
           >
-            Flexible <span className="text-gradient">Engagement</span> Models
-          </motion.h2>
+            Flexible Engagement Models
+          </ScrollFloat>
           <p className="mx-auto mt-8 max-w-2xl text-lg text-muted-foreground">
             We offer multiple ways to collaborate, ensuring the perfect fit for your project's
             scope, budget, and timeline.
