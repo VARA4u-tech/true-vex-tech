@@ -78,15 +78,15 @@
   --popover: oklch(0.1 0.02 320);
   --popover-foreground: oklch(0.98 0.005 320);
 
-  /* Signature PJN lime — #C4FF00 */
-  --primary: oklch(0.94 0.24 124);
-  --primary-foreground: oklch(0.08 0.02 280);
-  --primary-glow: oklch(0.97 0.22 124);
+  /* Darker Brand Blue */
+  --primary: #0d7e92;
+  --primary-foreground: #ffffff;
+  --primary-glow: #119fb9;
 
-  /* Secondary brand purple — #875EFA */
-  --accent: oklch(0.62 0.24 285);
-  --accent-foreground: oklch(0.99 0.005 280);
-  --accent-glow: oklch(0.72 0.22 285);
+  /* Even Darker Accent */
+  --accent: #0a6374;
+  --accent-foreground: #ffffff;
+  --accent-glow: #0d7e92;
 
   --secondary: oklch(0.16 0.02 280);
   --secondary-foreground: oklch(0.98 0.005 280);
@@ -97,15 +97,15 @@
   --destructive: oklch(0.62 0.25 27);
   --destructive-foreground: oklch(0.99 0 0);
 
-  --border: oklch(1 0 0 / 10%);
+  --border: oklch(1 0 0 / 15%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.94 0.24 124 / 60%);
+  --ring: #0d7e9299;
 
-  --chart-1: oklch(0.94 0.24 124);
-  --chart-2: oklch(0.62 0.24 285);
-  --chart-3: oklch(0.78 0.18 80);
-  --chart-4: oklch(0.55 0.22 280);
-  --chart-5: oklch(0.65 0.2 30);
+  --chart-1: #0d7e92;
+  --chart-2: #0a6374;
+  --chart-3: #119fb9;
+  --chart-4: #08505d;
+  --chart-5: #0d7e92;
 }
 
 .dark {

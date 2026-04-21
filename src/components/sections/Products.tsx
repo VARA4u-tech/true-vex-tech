@@ -71,7 +71,7 @@ export function Products() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-3xl border border-border bg-card"
+              className="group relative overflow-hidden rounded-3xl border-[1.5px] border-border bg-card"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img

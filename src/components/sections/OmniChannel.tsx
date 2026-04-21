@@ -51,7 +51,7 @@ export function OmniChannel() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 md:p-10"
+              className="relative overflow-hidden rounded-3xl border-[1.5px] border-border bg-card p-8 md:p-10"
             >
               <div className="font-display text-sm font-bold text-primary">0{i + 1}</div>
               <h3 className="font-display mt-6 text-2xl font-bold md:text-3xl">{it.title}</h3>

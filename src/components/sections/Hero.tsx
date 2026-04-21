@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { LampContainer } from "@/components/ui/lamp";
+import LightRays from "@/components/ui/LightRays";
 import VariableProximity from "@/components/ui/VariableProximity";
 
 const STATS = [
@@ -9,14 +10,23 @@ const STATS = [
   { value: "30%", label: "Cost reduction" },
 ];
 
-const HEADLINE = "Innovate. Develop. Accelerate. Your future.".split(" ");
-
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <LampContainer className="pt-8 md:pt-12">
-      <div ref={containerRef} className="relative mx-auto max-w-7xl px-5 md:px-8">
+      <LightRays
+        raysOrigin="top-center"
+        raysColor="#ffffff"
+        raysSpeed={1.5}
+        lightSpread={1.2}
+        rayLength={1.8}
+        followMouse={true}
+        mouseInfluence={0.2}
+        noiseAmount={0.1}
+        distortion={0.05}
+      />
+      <div ref={containerRef} className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 w-full">
         <div className="mx-auto max-w-5xl text-center">
           <motion.span
             initial={{ opacity: 0, y: 8 }}

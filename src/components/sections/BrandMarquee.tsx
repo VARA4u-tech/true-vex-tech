@@ -6,7 +6,7 @@ const marqueeString = SERVICES.join(" ✦ ") + " ✦ ";
 
 export function BrandMarquee() {
   return (
-    <section className="relative overflow-hidden border-y border-border bg-background py-8 text-muted-foreground/30 hover:text-foreground transition-colors duration-500">
+    <section className="relative overflow-hidden border-y border-border bg-background py-8 text-white/50 hover:text-white transition-colors duration-500">
       <CurvedLoop
         marqueeText={marqueeString}
         speed={1.5}
