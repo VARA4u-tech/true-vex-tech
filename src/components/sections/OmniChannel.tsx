@@ -45,20 +45,22 @@ export function OmniChannel() {
 
         <div className="mt-20 w-full">
           <ScrollStack
-            itemDistance={50}
-            itemScale={0.05}
-            itemStackDistance={20}
-            stackPosition="15%"
-            baseScale={0.9}
+            itemDistance={200}
+            itemScale={0.03}
+            itemStackDistance={25}
+            stackPosition="10%"
+            baseScale={0.92}
             useWindowScroll={true}
-            className="pb-24"
+            className="pb-48"
           >
             {ITEMS.map((it, i) => (
               <ScrollStackItem key={it.title}>
                 <div className="flex flex-col h-full justify-center">
-                  <div className="font-display text-sm font-bold text-primary">STEP 0{i + 1}</div>
-                  <h3 className="font-display mt-6 text-3xl font-bold md:text-5xl">{it.title}</h3>
-                  <p className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">
+                  <div className="font-display text-base font-bold tracking-widest text-primary">
+                    STEP 0{i + 1}
+                  </div>
+                  <h3 className="font-display mt-8 text-4xl font-bold md:text-6xl">{it.title}</h3>
+                  <p className="mt-8 max-w-2xl text-xl text-muted-foreground md:text-2xl leading-relaxed">
                     {it.body}
                   </p>
                 </div>

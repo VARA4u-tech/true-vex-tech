@@ -33,6 +33,7 @@ interface TransformData {
   scale: number;
   rotation: number;
   blur: number;
+  brightness: number;
 }
 
 interface StyledElement extends HTMLElement {
@@ -165,11 +166,30 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         translateY = pinEnd - cardTop + stackPositionPx + itemStackDistance * i;
       }
 
+      let brightness = 1;
+      // eslint-disable-next-line no-constant-condition
+      if (true) {
+        let topCardIndex = 0;
+        for (let j = 0; j < cardsRef.current.length; j++) {
+          const jCardTop = getElementOffset(cardsRef.current[j]);
+          const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
+          if (scrollTop >= jTriggerStart) {
+            topCardIndex = j;
+          }
+        }
+
+        if (i < topCardIndex) {
+          const depthInStack = topCardIndex - i;
+          brightness = Math.max(0.6, 1 - depthInStack * 0.1);
+        }
+      }
+
       const newTransform = {
         translateY: Math.round(translateY * 100) / 100,
         scale: Math.round(scale * 1000) / 1000,
         rotation: Math.round(rotation * 100) / 100,
         blur: Math.round(blur * 100) / 100,
+        brightness: Math.round(brightness * 100) / 100,
       };
 
       const lastTransform = lastTransformsRef.current.get(i);
@@ -178,11 +198,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         Math.abs(lastTransform.translateY - newTransform.translateY) > 0.1 ||
         Math.abs(lastTransform.scale - newTransform.scale) > 0.001 ||
         Math.abs(lastTransform.rotation - newTransform.rotation) > 0.1 ||
-        Math.abs(lastTransform.blur - newTransform.blur) > 0.1;
+        Math.abs(lastTransform.blur - newTransform.blur) > 0.1 ||
+        Math.abs(lastTransform.brightness - newTransform.brightness) > 0.01;
 
       if (hasChanged) {
         const transform = `translate3d(0, ${newTransform.translateY}px, 0) scale(${newTransform.scale}) rotate(${newTransform.rotation}deg)`;
-        const filter = newTransform.blur > 0 ? `blur(${newTransform.blur}px)` : "";
+        let filter = `brightness(${newTransform.brightness})`;
+        if (newTransform.blur > 0) filter += ` blur(${newTransform.blur}px)`;
 
         card.style.transform = transform;
         card.style.filter = filter;
