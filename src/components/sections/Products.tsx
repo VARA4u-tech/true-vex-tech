@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import ScrollFloat from "@/components/ui/ScrollFloat";
 
 const PRODUCTS = [
   {
@@ -45,9 +46,17 @@ export function Products() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="max-w-3xl">
           <span className="text-xs uppercase tracking-[0.25em] text-primary">Our Expertise</span>
-          <h2 className="font-display mt-4 text-balance text-4xl font-bold leading-[1.05] md:text-6xl">
+          <ScrollFloat
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.03}
+            containerClassName="mt-4"
+            textClassName="font-display text-balance text-4xl font-bold leading-[1.05] md:text-6xl"
+          >
             Your Advantage through Technology
-          </h2>
+          </ScrollFloat>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
             We deliver cutting-edge solutions across the entire software lifecycle, from initial
             concept to high-performance production environments.

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { motion } from "framer-motion";
+import ScrollFloat from "@/components/ui/ScrollFloat";
 
 export const Route = createFileRoute("/services")({
   component: ServicesPage,
@@ -80,14 +81,15 @@ function ServicesPage() {
             >
               Our Expertise
             </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="font-display mt-4 text-5xl font-bold md:text-7xl"
+            <ScrollFloat
+              animationDuration={1.2}
+              ease="back.inOut(2)"
+              stagger={0.04}
+              containerClassName="mt-4"
+              textClassName="font-display text-5xl font-bold md:text-7xl"
             >
-              Comprehensive <span className="text-gradient">Services</span>
-            </motion.h1>
+              Comprehensive Services
+            </ScrollFloat>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
