@@ -2,38 +2,41 @@ import { motion } from "framer-motion";
 
 const ITEMS = [
   {
-    title: "eCommerce",
-    body: "Pre-built plugins compatible with Shopify, Magento, WooCommerce, Salesforce, Shopstar, PrestaShop and Storefront. Plus, tailor the integration to suit your business.",
+    title: "Discovery & Analysis",
+    body: "We thoroughly understand your business goals, challenges, and technical requirements to build a solid foundation.",
   },
   {
-    title: "POS Integration",
-    body: "Seamless POS integrations through ACS, Cow Hills, BCX, Posworx and Yoyo. We are constantly expanding our list of partners to keep checkout smooth.",
+    title: "Design & Planning",
+    body: "Crafting detailed architectural designs and a clear, actionable roadmap for flawless execution.",
   },
   {
-    title: "Soft Touch Integration",
-    body: "Use our PayUp merchant app or static QR codes to get up and running in minutes. Cashless payments speed up checkout and reduce queues.",
+    title: "Development & Testing",
+    body: "Building robust, scalable solutions using agile methodologies and rigorous quality assurance at every step.",
+  },
+  {
+    title: "Deployment & Support",
+    body: "Seamless production deployment and continuous, reliable support to ensure your long-term digital success.",
   },
 ];
 
 export function OmniChannel() {
   return (
-    <section className="relative py-28 md:py-36">
+    <section id="approach" className="relative py-28 md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="max-w-4xl">
           <span className="text-xs uppercase tracking-[0.25em] text-primary">
-            Omni-channel solutions
+            Our Methodology
           </span>
           <h2 className="font-display mt-4 text-balance text-5xl font-bold leading-[0.98] md:text-7xl">
-            Seamless <span className="text-gradient">checkout</span> wherever
-            they shop
+            Our <span className="text-gradient">Proven</span> Approach
           </h2>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Offer shoppers the convenience of fast checkouts online and in-store
-            with the PayJustNow app.
+            We follow a structured, transparent process to turn your complex
+            challenges into streamlined digital solutions.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-3">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {ITEMS.map((it, i) => (
             <motion.div
               key={it.title}

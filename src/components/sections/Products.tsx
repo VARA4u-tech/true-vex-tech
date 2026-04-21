@@ -1,45 +1,59 @@
 import { motion } from "framer-motion";
-import pay12 from "@/assets/pay-in-12.jpg";
-import pay3 from "@/assets/pay-in-3.jpg";
 
 const PRODUCTS = [
   {
-    tag: "Retail Credit",
-    title: "Pay in 12",
+    tag: "Development",
+    title: "Software Development",
     description:
-      "For some shoppers, even paying in 3 places your product out of reach. That's why we've introduced an extra-flexible retail credit option, Pay in 12. It makes bigger-ticket items more attainable with smaller payments spread over 12 months.",
+      "Building custom applications, web, and mobile solutions tailored to your business needs with modern frameworks and scalable architecture.",
     href: "#",
-    image: pay12,
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
   },
   {
-    tag: "BNPL",
-    title: "Pay in 3",
+    tag: "Quality",
+    title: "Software Testing",
     description:
-      "Convert more browsers into buyers by making your products affordable. Shoppers who PayJustNow split their purchase into 3 interest-free payments and ease the pressure on their budget. Think bigger basket sizes and fewer abandoned carts.",
+      "Ensuring the quality, reliability, and performance of your software with comprehensive manual and automated testing strategies.",
     href: "#",
-    image: pay3,
+    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=2128&auto=format&fit=crop",
+  },
+  {
+    tag: "Infrastructure",
+    title: "DevOps & Cloud",
+    description:
+      "Streamlining your development lifecycle and optimizing infrastructure for scalability, security, and maximum efficiency.",
+    href: "#",
+    image: "https://images.unsplash.com/photo-1667372333374-0d449ac7bc0b?q=80&w=2070&auto=format&fit=crop",
+  },
+  {
+    tag: "Talent",
+    title: "IT Staffing",
+    description:
+      "Providing access to top-tier technical talent to augment your internal team and accelerate your project delivery timelines.",
+    href: "#",
+    image: "https://images.unsplash.com/photo-1521737706234-2803fcaf542a?q=80&w=2070&auto=format&fit=crop",
   },
 ];
 
 export function Products() {
   return (
-    <section id="products" className="relative py-28 md:py-36">
+    <section id="services" className="relative py-28 md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="max-w-3xl">
           <span className="text-xs uppercase tracking-[0.25em] text-primary">
-            Payment products
+            Our Expertise
           </span>
           <h2 className="font-display mt-4 text-balance text-4xl font-bold leading-[1.05] md:text-6xl">
-            More ways to get paid
+            Your Advantage through Technology
           </h2>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Expect more orders as shoppers pay later while you get paid upfront.
-            We created these straight and split payment services to help South
-            Africans boost buying power.
+            We deliver cutting-edge solutions across the entire software
+            lifecycle, from initial concept to high-performance production
+            environments.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
+        <div className="mt-16 grid gap-6 sm:grid-cols-2">
           {PRODUCTS.map((p, i) => (
             <motion.article
               key={p.title}

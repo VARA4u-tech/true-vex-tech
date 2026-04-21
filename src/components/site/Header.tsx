@@ -2,12 +2,22 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 const NAV = [
-  { label: "Shoppers", href: "/" },
-  { label: "Business", href: "/", active: true },
-  { label: "Pay in 3", href: "/" },
-  { label: "Pay in 12", href: "/" },
-  { label: "About", href: "/" },
+  { label: "Home", href: "#", active: true },
+  { label: "Services", href: "#services" },
+];
+
+const MORE = [
+  { label: "About Us", href: "#" },
+  { label: "Careers", href: "#" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Header() {
@@ -23,13 +33,15 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-border/60 bg-background/80 backdrop-blur-xl"
-          : "bg-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 md:top-4 md:px-5`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-20 md:px-8">
+      <div
+        className={`mx-auto flex h-16 max-w-6xl items-center justify-between px-5 transition-all duration-500 md:rounded-full border border-white/20 shadow-lg shadow-black/5 ${
+          scrolled
+            ? "bg-background/70 backdrop-blur-xl"
+            : "bg-background/40 backdrop-blur-md"
+        }`}
+      >
         <Link to="/" className="flex items-center">
           <Logo />
         </Link>
@@ -39,29 +51,52 @@ export function Header() {
             <a
               key={item.label}
               href={item.href}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                item.active
-                  ? "bg-foreground/10 text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+              className={`group relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                item.active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {item.label}
+              <span
+                className={`absolute inset-0 z-0 transition-transform duration-150 ease-in-out ${
+                  item.active
+                    ? "bg-foreground/10 translate-y-0"
+                    : "bg-foreground/10 translate-y-full group-hover:translate-y-0"
+                }`}
+              />
+              <span className="relative z-10">{item.label}</span>
             </a>
           ))}
+
+          <DropdownMenu>
+            <DropdownMenuTrigger className="group relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground outline-none">
+              <span className="absolute inset-0 z-0 translate-y-full bg-foreground/10 transition-transform duration-150 ease-in-out group-hover:translate-y-0" />
+              <span className="relative z-10 flex items-center gap-1">
+                Company
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="transition-transform group-data-[state=open]:rotate-180">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </span>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48 rounded-2xl border-white/20 bg-background/90 backdrop-blur-xl p-2">
+              {MORE.map((item) => (
+                <DropdownMenuItem key={item.label} asChild>
+                  <a
+                    href={item.href}
+                    className="flex cursor-pointer items-center rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground outline-none"
+                  >
+                    {item.label}
+                  </a>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
 
         <div className="flex items-center gap-2">
           <a
-            href="#"
-            className="hidden rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:inline-flex"
-          >
-            Login
-          </a>
-          <a
-            href="#apply"
+            href="#contact"
             className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5 hover:bg-primary-glow"
           >
-            Apply now
+            Get Started
           </a>
           <button
             onClick={() => setOpen((o) => !o)}

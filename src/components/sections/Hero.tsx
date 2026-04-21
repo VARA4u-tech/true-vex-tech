@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 
 const STATS = [
-  { value: "R7.5B", label: "Total transactions" },
-  { value: "2.6M", label: "Customers" },
-  { value: "R7.8B", label: "Available to spend" },
+  { value: "60%", label: "Data efficiency gain" },
+  { value: "40%", label: "User engagement boost" },
+  { value: "30%", label: "Cost reduction" },
 ];
 
-const HEADLINE = "Increase revenue with our retail solutions".split(" ");
+const HEADLINE = "Innovate. Develop. Accelerate. Your future.".split(" ");
 
 export function Hero() {
   return (
@@ -27,7 +27,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            For Business
+            Software Consultancy
           </motion.span>
 
           <h1 className="font-display mt-6 text-balance text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-[88px]">
@@ -43,7 +43,7 @@ export function Hero() {
                 }}
                 className="mr-3 inline-block md:mr-5"
               >
-                {word === "revenue" ? (
+                {word === "Accelerate." ? (
                   <span className="text-gradient">{word}</span>
                 ) : (
                   word
@@ -58,8 +58,8 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mx-auto mt-8 max-w-2xl text-balance text-lg text-muted-foreground md:text-xl"
           >
-            Let&apos;s get you paid. Increase your sales with split payment
-            options and performance marketing built for South African retail.
+            Leading software consultancy committed to delivering cutting-edge
+            solutions that drive business growth and operational excellence.
           </motion.p>
 
           <motion.div
@@ -69,10 +69,10 @@ export function Hero() {
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
             <a
-              href="#apply"
+              href="#contact"
               className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-base font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5 hover:bg-primary-glow"
             >
-              Apply now
+              Get a Quote
               <svg
                 width="18"
                 height="18"
@@ -86,10 +86,10 @@ export function Hero() {
               </svg>
             </a>
             <a
-              href="#products"
+              href="#services"
               className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-7 py-4 text-base font-semibold text-foreground transition-colors hover:bg-foreground/10"
             >
-              See how it works
+              Explore Services
             </a>
           </motion.div>
         </div>

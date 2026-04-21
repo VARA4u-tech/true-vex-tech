@@ -3,34 +3,22 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const QUOTES = [
   {
-    role: "Managing Director, Adidas",
-    name: "Paddy Muldoon",
+    role: "Financial Services Firm",
+    name: "Enterprise AI Integration",
     quote:
-      "Introducing an alternative payment option to customers has enabled our Adidas retail business to extend its reach. Access to the team, the integration into our payment portal, and the end-user experience have been nothing short of seamless. This has led to increased conversions, sales and repeat business.",
+      "Implemented a custom AI solution that transformed our data workflow, improving processing speeds by 60% and enabling real-time analytics for our global team.",
   },
   {
-    role: "Business Owner, GoMaxx",
-    name: "James Taylor",
+    role: "Retail Sector Client",
+    name: "Mobile App Development",
     quote:
-      "Signing up opened a whole new market segment for our business. We now provide customers with interest- and fee-free payment terms, while PayJustNow promotes our brand to new pre-approved customers within the ecosystem.",
+      "The cross-platform application developed by TrueVex boosted our user engagement by 40% within the first quarter, significantly increasing our mobile revenue share.",
   },
   {
-    role: "Retail Operations, Puma",
-    name: "Nathier Schroeder",
+    role: "Logistics Company",
+    name: "Cloud Infrastructure Migration",
     quote:
-      "As a leading sports brand, Puma has always been committed to providing exceptional experiences for our customers. When we partnered with PayJustNow, we were impressed by their innovative payment solution.",
-  },
-  {
-    role: "Marketing Team, Cape Union Mart",
-    name: "Cape Union Mart",
-    quote:
-      "PayJustNow gives Cape Union Mart a big advantage by offering customers a simple and adaptable payment option — meaning more sales potential, fewer financial obstacles, and bigger purchases.",
-  },
-  {
-    role: "Head of Financial Services, Retailability",
-    name: "Tim Maxwell",
-    quote:
-      "The partnership with PayJustNow has proven to be a win-win, increasing sales and customer loyalty across all of Retailability's retail brands and providing customers with a fee-free, interest-free way to pay.",
+      "Migrating our legacy systems to a scalable cloud environment reduced our operational costs by 30% and eliminated downtime during peak season.",
   },
 ];
 
@@ -46,11 +34,11 @@ export function Testimonials() {
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <span className="text-xs uppercase tracking-[0.25em] text-primary">
-              Testimonials
+              Success Stories
             </span>
             <h2 className="font-display mt-4 text-balance text-4xl font-bold leading-[1.02] md:text-6xl">
-              Why businesses love <br />
-              <span className="text-gradient">PayJustNow</span>
+              Proven results for <br />
+              <span className="text-gradient">global enterprises</span>
             </h2>
           </div>
           <div className="flex gap-2">
