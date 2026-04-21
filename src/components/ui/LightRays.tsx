@@ -21,6 +21,8 @@ type RaysOrigin =
   | "bottom-right"
   | "bottom-left";
 
+type UniformValue = number | number[] | [number, number] | [number, number, number];
+
 const getAnchorAndDir = (origin: RaysOrigin, w: number, h: number) => {
   // Negative value moves the origin further inside the container (downwards for top-center)
   const outside = -0.1;
@@ -76,7 +78,7 @@ const LightRays: React.FC<LightRaysProps> = ({
   className = "",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const uniformsRef = useRef<Record<string, { value: any }>>(null);
+  const uniformsRef = useRef<Record<string, { value: UniformValue }>>(null);
   const rendererRef = useRef<Renderer>(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
   const smoothMouseRef = useRef({ x: 0.5, y: 0.5 });
