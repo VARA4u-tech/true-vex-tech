@@ -108,7 +108,7 @@ export function OmniChannel() {
             itemDistance={200}
             itemScale={0.03}
             itemStackDistance={20}
-            stackPosition="12%"
+            stackPosition="28%"
             baseScale={0.96}
             useWindowScroll={true}
             className="pb-32 md:pb-48"

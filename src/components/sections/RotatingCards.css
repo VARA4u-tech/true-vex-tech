@@ -1,0 +1,129 @@
+.rotating-cards-wrapper {
+  --w-card: 280px;
+  --h-card: 400px;
+  --rotate-card: 20deg;
+  --insetX-card: 50px;
+  --t-card: calc(var(--insetX-card) * 1.5);
+  --w-wrap-card: calc(var(--w-card) * 2.5);
+  --round: 24px;
+  --pd: 6px;
+
+  position: relative;
+  width: 100%;
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+@media (max-width: 768px) {
+  .rotating-cards-wrapper {
+    --w-card: 200px;
+    --h-card: 300px;
+    --insetX-card: 30px;
+    height: 400px;
+  }
+}
+
+.rotating-card {
+  position: absolute;
+  width: var(--w-card);
+  height: var(--h-card);
+  border-radius: var(--round);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.rotating-card-content {
+  position: relative;
+  width: calc(100% - calc(var(--pd) * 2));
+  height: calc(100% - calc(var(--pd) * 2));
+  border-radius: calc(var(--round) - var(--pd));
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  justify-content: space-between;
+}
+
+.rotating-card-bg-letter {
+  position: absolute;
+  inset: 50% 0 0 50%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.rotating-card-icon {
+  z-index: 1;
+  color: white;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.rotating-card-info {
+  z-index: 2;
+  text-align: left;
+}
+
+/* Position States */
+.rotating-card[data-pos="0"] {
+  z-index: 10;
+  transform: translate3d(0, 0, 100px) rotateY(0deg);
+  opacity: 1;
+}
+
+.rotating-card[data-pos="1"] {
+  z-index: 5;
+  transform: translate3d(calc(var(--w-card) * 0.8), 0, 0) rotateY(var(--rotate-card));
+  opacity: 0.6;
+}
+
+.rotating-card[data-pos="2"] {
+  z-index: 2;
+  transform: translate3d(0, 20px, -100px);
+  opacity: 0.3;
+}
+
+.rotating-card[data-pos="3"] {
+  z-index: 5;
+  transform: translate3d(calc(var(--w-card) * -0.8), 0, 0) rotateY(calc(var(--rotate-card) * -1));
+  opacity: 0.6;
+}
+
+.stat-line-wrapper {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  height: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stat-line-glow {
+  position: absolute;
+  width: 200px;
+  height: 4px;
+  background: var(--primary);
+  filter: blur(8px);
+  opacity: 0.5;
+}
+
+.stat-line-main {
+  width: 300px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}

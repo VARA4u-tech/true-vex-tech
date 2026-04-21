@@ -18,7 +18,7 @@ function Index() {
       <main>
         <Hero />
         <BrandMarquee />
-        <Products variant="minimal" />
+        <Products variant="full" />
         <OmniChannel />
         <FinalCTA />
       </main>

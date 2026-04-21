@@ -27,19 +27,19 @@ export function Hero() {
         distortion={0.05}
       />
       <div ref={containerRef} className="relative z-10 mx-auto max-w-7xl px-5 md:px-8 w-full">
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto max-w-7xl text-center">
           <motion.span
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border-[2px] border-white/30 bg-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+            className="inline-flex items-center gap-2 rounded-full border-[2px] border-white/30 bg-foreground/5 px-6 py-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            <span className="h-2 w-2 rounded-full bg-primary" />
             Software Consultancy
           </motion.span>
 
-          <h1 className="font-display mt-6 text-balance text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-[88px]">
+          <h1 className="font-display mt-8 text-balance text-6xl font-bold leading-[0.9] tracking-tighter md:text-8xl lg:text-[110px]">
             <VariableProximity
               label="Innovate. Develop. Accelerate. Your future."
               fromFontVariationSettings="'wght' 400, 'opsz' 9"
@@ -47,6 +47,7 @@ export function Hero() {
               containerRef={containerRef}
               radius={100}
               falloff="linear"
+              className="px-4"
             />
           </h1>
 
@@ -55,7 +56,7 @@ export function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mx-auto mt-8 max-w-2xl text-balance text-lg text-muted-foreground md:text-xl"
+            className="mx-auto mt-10 max-w-3xl text-balance text-xl text-muted-foreground md:text-2xl md:leading-relaxed"
           >
             Leading software consultancy committed to delivering cutting-edge solutions that drive
             business growth and operational excellence.
@@ -66,11 +67,11 @@ export function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.55 }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-4"
+            className="mt-12 flex flex-wrap items-center justify-center gap-6"
           >
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-base font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5 hover:bg-primary-glow"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-10 py-5 text-lg font-bold text-primary-foreground shadow-glow transition-transform hover:-translate-y-1 hover:bg-primary-glow"
             >
               Get a Quote
               <svg
@@ -87,7 +88,7 @@ export function Hero() {
             </a>
             <a
               href="#services"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-7 py-4 text-base font-semibold text-foreground transition-colors hover:bg-foreground/10"
+              className="group inline-flex items-center gap-2 rounded-full border-[2.5px] border-white/30 bg-white/5 px-10 py-5 text-lg font-bold backdrop-blur-md transition-all hover:bg-white/10"
             >
               Explore Services
             </a>
@@ -95,7 +96,7 @@ export function Hero() {
         </div>
 
         {/* Stats */}
-        <div className="mt-24 grid grid-cols-1 gap-px overflow-hidden brutalist-card bg-border md:grid-cols-3">
+        <div className="mt-24 grid grid-cols-1 overflow-hidden brutalist-card md:grid-cols-3">
           {STATS.map((s, i) => (
             <motion.div
               key={s.label}
@@ -103,7 +104,9 @@ export function Hero() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-card px-8 py-12 text-center"
+              className={`bg-card px-8 py-12 text-center transition-colors hover:bg-white/[0.03] ${
+                i < STATS.length - 1 ? "md:border-r border-white/10" : ""
+              } ${i > 0 ? "border-t md:border-t-0 border-white/10" : ""}`}
             >
               <div className="font-display text-5xl font-bold tracking-tight text-gradient md:text-6xl">
                 {s.value}

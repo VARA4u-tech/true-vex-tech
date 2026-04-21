@@ -1,30 +1,33 @@
-import { motion } from "framer-motion";
-import ScrollFloat from "@/components/ui/ScrollFloat";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 
 const PRODUCTS = [
   {
-    tag: "Engineering",
+    tag: "Development",
     title: "Software Development",
     description:
-      "Building robust, scalable, and secure software solutions tailored to your unique business requirements. Our expertise spans Web, Mobile, Cloud-native, and API development.",
+      "Building robust, scalable, and secure software solutions tailored to your unique business requirements. Our expertise spans across various domains and technologies, ensuring your vision becomes a reality.",
     href: "#",
     image: "https://i.ibb.co/3mMKX5ds/Chat-GPT-Image-Apr-21-2026-06-48-43-PM.png",
+    features: ["Web Applications", "Mobile Apps", "Cloud-native Architecture"],
   },
   {
     tag: "Quality",
     title: "Software Testing",
     description:
-      "Ensuring the quality, reliability, and security of your software through rigorous testing methodologies including Automation, Performance, and Security testing.",
+      "Ensuring the quality, reliability, and security of your software through rigorous testing methodologies and advanced tools. We deliver confidence in every release.",
     href: "#",
     image: "https://i.ibb.co/ycQrk2Wr/Chat-GPT-Image-Apr-21-2026-06-49-53-PM.png",
+    features: ["Automation Testing", "Performance Analysis", "Security Audits"],
   },
   {
-    tag: "Efficiency",
+    tag: "Cloud",
     title: "DevOps Consulting",
     description:
       "Streamlining your development lifecycle with CI/CD, Infrastructure as Code (IaC), and Cloud Migration to optimize scalability and maximum performance.",
     href: "#",
     image: "https://i.ibb.co/fzRkvkNQ/Chat-GPT-Image-Apr-21-2026-07-04-26-PM.png",
+    features: ["CI/CD Pipelines", "Kubernetes", "Cloud Migration"],
   },
   {
     tag: "Resources",
@@ -33,6 +36,7 @@ const PRODUCTS = [
       "Access top-tier IT talent exactly when you need it. We provide skilled professionals via Contract Staffing, Dedicated Teams, and Permanent Placement solutions.",
     href: "#",
     image: "https://i.ibb.co/8DF3470t/Chat-GPT-Image-Apr-21-2026-07-02-39-PM.png",
+    features: ["Expert Recruitment", "Staff Augmentation", "Dedicated Teams"],
   },
 ];
 
@@ -41,229 +45,206 @@ type ProductsProps = {
 };
 
 export function Products({ variant = "full" }: ProductsProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const isMinimal = variant === "minimal";
 
-  return (
-    <section id="services" className="relative py-28 md:py-36">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="max-w-3xl">
-          <span className="text-xs uppercase tracking-[0.25em] text-primary">Our Expertise</span>
-          <ScrollFloat
-            animationDuration={1}
-            ease="back.inOut(2)"
-            scrollStart="center bottom+=50%"
-            scrollEnd="bottom bottom-=40%"
-            stagger={0.03}
-            containerClassName="mt-4"
-            textClassName="font-display text-balance text-4xl font-bold leading-[1.05] md:text-6xl"
-          >
-            Your Advantage through Technology
-          </ScrollFloat>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            We deliver cutting-edge solutions across the entire software lifecycle, from initial
-            concept to high-performance production environments.
-          </p>
-        </div>
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {/* Large Hero Bento Card - Software Development */}
-          <motion.article
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7 }}
-            className="group relative overflow-hidden brutalist-card lg:col-span-2"
-          >
-            <div className="flex flex-col h-full">
-              {!isMinimal && (
-                <div className="relative aspect-video w-full overflow-hidden border-b border-white/10 bg-[#050505]">
-                  <img
-                    src={PRODUCTS[0].image}
-                    alt={PRODUCTS[0].title}
-                    className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute left-5 top-5 rounded-full bg-background/80 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] backdrop-blur-md">
-                    {PRODUCTS[0].tag}
-                  </div>
-                </div>
-              )}
-              <div className="flex flex-col justify-center p-8 md:p-12">
-                <h3 className="font-display text-3xl font-bold md:text-5xl">{PRODUCTS[0].title}</h3>
-                <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                  {PRODUCTS[0].description}
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    // We have 4 sections, so we divide the 0-1 range by 4
+    const sectionIndex = Math.min(Math.floor(latest * PRODUCTS.length), PRODUCTS.length - 1);
+    if (sectionIndex !== activeIndex) {
+      setActiveIndex(sectionIndex);
+    }
+  });
+
+  if (isMinimal) {
+    return (
+      <section id="services" className="relative py-28 md:py-36">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-2xl">
+              <motion.span
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-xs font-bold uppercase tracking-[0.25em] text-primary"
+              >
+                Our Expertise
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="mt-4 font-display text-4xl font-bold md:text-6xl"
+              >
+                Engineering Excellence.
+              </motion.h2>
+            </div>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="max-w-md text-lg text-muted-foreground"
+            >
+              We combine deep technical expertise with strategic vision to build software that
+              solves complex business problems.
+            </motion.p>
+          </div>
+
+          <div className="mt-20 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {PRODUCTS.map((product, index) => (
+              <motion.article
+                key={product.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group relative flex flex-col border border-white/10 bg-white/[0.02] p-8 transition-colors hover:border-primary/50"
+              >
+                <div className="mb-6 h-1 w-10 bg-primary/30 transition-all group-hover:w-full group-hover:bg-primary" />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-primary/60">
+                  {product.tag}
+                </span>
+                <h3 className="mt-4 font-display text-2xl font-bold">{product.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  {product.description}
                 </p>
-                <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
-                  <div className="flex gap-4">
-                    {["Web", "Mobile", "Cloud"].map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest"
-                      >
-                        {tech}
+                <div className="mt-auto pt-8">
+                  <div className="flex flex-wrap gap-2">
+                    {product.features.map((f) => (
+                      <span key={f} className="text-[9px] font-medium uppercase text-white/40">
+                        • {f}
                       </span>
                     ))}
                   </div>
-                  <a
-                    href={PRODUCTS[0].href}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary-glow"
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section ref={containerRef} id="services" className="relative h-[400vh] bg-background">
+      <div className="sticky top-0 flex h-screen items-center pt-24 overflow-hidden">
+        <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            {/* Left Side: Content Detail */}
+            <div className="lg:col-span-6 flex flex-col justify-center py-20">
+              <div className="mb-12">
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  className="text-xs font-bold uppercase tracking-[0.3em] text-primary"
+                >
+                  Expertise / 0{activeIndex + 1}
+                </motion.span>
+                <AnimatePresence mode="wait">
+                  <motion.h2
+                    key={activeIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="mt-6 font-display text-5xl font-bold md:text-7xl"
                   >
-                    View Enterprise Solutions
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      className="transition-transform group-hover:translate-x-1"
-                    >
-                      <path d="M5 12h14M13 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                </div>
+                    {PRODUCTS[activeIndex].title}
+                  </motion.h2>
+                </AnimatePresence>
               </div>
-            </div>
-          </motion.article>
 
-          {/* Small Bento Card - Software Testing */}
-          <motion.article
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="group relative overflow-hidden brutalist-card lg:col-span-1"
-          >
-            <div className="flex flex-col h-full p-8 md:p-10">
-              <div className="mb-6 h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-              </div>
-              <h3 className="font-display text-2xl font-bold md:text-3xl">{PRODUCTS[1].title}</h3>
-              <p className="mt-4 text-base text-muted-foreground">{PRODUCTS[1].description}</p>
-              {!isMinimal && (
-                <div className="mt-8 relative flex-1 overflow-hidden rounded-2xl border border-white/5 bg-[#050505]">
-                  <img
-                    src={PRODUCTS[1].image}
-                    className="h-full w-full object-contain transition-all duration-700 group-hover:scale-105"
-                    alt=""
-                  />
-                </div>
-              )}
-            </div>
-          </motion.article>
-
-          {/* Small Bento Card - DevOps Consulting */}
-          <motion.article
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="group relative overflow-hidden brutalist-card lg:col-span-1"
-          >
-            <div className="p-8 md:p-10 h-full flex flex-col">
-              <div className="mb-6 h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
-                </svg>
-              </div>
-              <h3 className="font-display text-2xl font-bold md:text-3xl">{PRODUCTS[2].title}</h3>
-              <p className="mt-4 text-base text-muted-foreground">{PRODUCTS[2].description}</p>
-              {!isMinimal && (
-                <div className="mt-8 relative flex-1 overflow-hidden rounded-2xl border border-white/5 bg-[#050505]">
-                  <img
-                    src={PRODUCTS[2].image}
-                    className="h-full w-full object-contain transition-all duration-700 group-hover:scale-105"
-                    alt=""
-                  />
-                </div>
-              )}
-              <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-widest text-primary">
-                  High Efficiency
-                </span>
-                <a
-                  href={PRODUCTS[2].href}
-                  className="h-10 w-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary transition-colors"
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
+              <div className="space-y-8">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeIndex}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                   >
-                    <path d="M5 12h14M13 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </motion.article>
-
-          {/* Large Horizontal Bento Card - IT Staffing */}
-          <motion.article
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="group relative overflow-hidden brutalist-card lg:col-span-2"
-          >
-            <div className="flex flex-col h-full">
-              {!isMinimal && (
-                <div className="relative aspect-video w-full overflow-hidden border-b border-white/10 bg-[#050505]">
-                  <img
-                    src={PRODUCTS[3].image}
-                    className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
-                    alt=""
-                  />
-                  <div className="absolute left-5 top-5 rounded-full bg-background/80 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] backdrop-blur-md">
-                    Resource Solutions
-                  </div>
-                </div>
-              )}
-              <div className="p-8 md:p-12">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-                  <div className="md:max-w-[60%]">
-                    <h3 className="font-display text-3xl font-bold md:text-5xl">
-                      {PRODUCTS[3].title}
-                    </h3>
-                    <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-                      {PRODUCTS[3].description}
+                    <p className="max-w-md text-xl leading-relaxed text-muted-foreground">
+                      {PRODUCTS[activeIndex].description}
                     </p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    {["Contract Staffing", "Dedicated Teams"].map((f) => (
-                      <div
-                        key={f}
-                        className="flex items-center gap-2 text-sm font-medium text-gray-300"
-                      >
-                        <div className="h-1.5 w-1.5 rounded-full bg-primary" /> {f}
-                      </div>
-                    ))}
-                  </div>
+
+                    <div className="mt-10 flex flex-wrap gap-3">
+                      {PRODUCTS[activeIndex].features.map((f) => (
+                        <span
+                          key={f}
+                          className="rounded-full border border-primary/20 bg-primary/5 px-5 py-2 text-[11px] font-bold uppercase tracking-widest text-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.1)]"
+                        >
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Progress Indicators */}
+                <div className="pt-12 flex gap-3">
+                  {PRODUCTS.map((_, i) => (
+                    <div
+                      key={i}
+                      className="relative h-1 w-12 overflow-hidden rounded-full bg-white/10"
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-primary"
+                        initial={{ scaleX: 0 }}
+                        animate={{
+                          scaleX: i === activeIndex ? 1 : i < activeIndex ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.5 }}
+                        style={{ originX: 0 }}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          </motion.article>
+
+            {/* Right Side: Immersive Image Gallery */}
+            <div className="hidden lg:flex lg:col-span-6 items-center justify-center">
+              <div className="relative h-[600px] w-full max-w-[600px]">
+                <div className="relative h-full w-full overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#050505] shadow-2xl">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeIndex}
+                      initial={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
+                      animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, scale: 0.9, filter: "blur(20px)" }}
+                      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute inset-0"
+                    >
+                      <img
+                        src={PRODUCTS[activeIndex].image}
+                        alt={PRODUCTS[activeIndex].title}
+                        className="h-full w-full object-contain p-12"
+                      />
+
+                      {/* Cyber Overlays */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_70%)]" />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Decorative Tech Elements */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute -right-10 -top-10 h-32 w-32 rounded-full border border-dashed border-primary/20"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
