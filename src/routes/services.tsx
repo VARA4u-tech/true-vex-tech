@@ -21,8 +21,7 @@ const SERVICES = [
       "Frontend Development",
       "Backend Development",
     ],
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
+    image: "https://i.ibb.co/3mMKX5ds/Chat-GPT-Image-Apr-21-2026-06-48-43-PM.png",
   },
   {
     title: "Software Testing",
@@ -34,8 +33,7 @@ const SERVICES = [
       "Security & Usability Testing",
       "Compatibility & Regression Testing",
     ],
-    image:
-      "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=2128&auto=format&fit=crop",
+    image: "https://i.ibb.co/ycQrk2Wr/Chat-GPT-Image-Apr-21-2026-06-49-53-PM.png",
   },
   {
     title: "DevOps Consulting",
@@ -48,8 +46,7 @@ const SERVICES = [
       "Containerization (Docker, K8s)",
       "Cloud Migration",
     ],
-    image:
-      "https://images.unsplash.com/photo-1667372333374-0d449ac7bc0b?q=80&w=2070&auto=format&fit=crop",
+    image: "https://i.ibb.co/fzRkvkNQ/Chat-GPT-Image-Apr-21-2026-07-04-26-PM.png",
   },
   {
     title: "IT Staffing",
@@ -62,8 +59,7 @@ const SERVICES = [
       "Permanent Placement",
       "Skill Assessment",
     ],
-    image:
-      "https://images.unsplash.com/photo-1521737706234-2803fcaf542a?q=80&w=2070&auto=format&fit=crop",
+    image: "https://i.ibb.co/8DF3470t/Chat-GPT-Image-Apr-21-2026-07-02-39-PM.png",
   },
 ];
 

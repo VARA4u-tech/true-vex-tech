@@ -8,27 +8,6 @@ import { OmniChannel } from "@/components/sections/OmniChannel";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      {
-        title: "TrueVex Technologies — Innovate. Develop. Accelerate.",
-      },
-      {
-        name: "description",
-        content:
-          "Leading software consultancy delivering cutting-edge applications, testing, DevOps, and IT staffing solutions to drive business growth.",
-      },
-      {
-        property: "og:title",
-        content: "TrueVex Technologies — Your Software Future Starts Here",
-      },
-      {
-        property: "og:description",
-        content:
-          "Custom software development, comprehensive testing, and cloud infrastructure optimization for global enterprises.",
-      },
-    ],
-  }),
   component: Index,
 });
 
@@ -39,7 +18,7 @@ function Index() {
       <main>
         <Hero />
         <BrandMarquee />
-        <Products />
+        <Products variant="minimal" />
         <OmniChannel />
         <FinalCTA />
       </main>
