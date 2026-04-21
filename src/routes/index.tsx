@@ -5,7 +5,6 @@ import { Hero } from "@/components/sections/Hero";
 import { BrandMarquee } from "@/components/sections/BrandMarquee";
 import { Products } from "@/components/sections/Products";
 import { OmniChannel } from "@/components/sections/OmniChannel";
-import { Testimonials } from "@/components/sections/Testimonials";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export const Route = createFileRoute("/")({
@@ -42,7 +41,6 @@ function Index() {
         <BrandMarquee />
         <Products />
         <OmniChannel />
-        <Testimonials />
         <FinalCTA />
       </main>
       <Footer />

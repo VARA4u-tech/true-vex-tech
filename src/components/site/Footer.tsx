@@ -34,7 +34,7 @@ export function Footer() {
         {/* Top Grid */}
         <div className="grid gap-4 lg:grid-cols-[1fr_0.4fr]">
           {/* Main Links Box */}
-          <div className="rounded-[2.5rem] border-[1.5px] border-white/20 bg-[#0A0A0A] p-10 md:p-16">
+          <div className="brutalist-card p-10 md:p-16">
             <div className="grid gap-12 sm:grid-cols-3">
               <div>
                 <h4 className="font-display text-xl font-bold text-[#0D7E92]">Services</h4>
@@ -103,7 +103,7 @@ export function Footer() {
           {/* Right Column Boxes */}
           <div className="flex flex-col gap-4">
             {/* Contact Box */}
-            <div className="flex flex-1 flex-col items-center justify-center rounded-[2.5rem] border-[1.5px] border-white/20 bg-[#0A0A0A] p-10 text-center">
+            <div className="flex flex-1 flex-col items-center justify-center brutalist-card p-10 text-center">
               <h4 className="font-display text-xl font-bold text-[#0D7E92]">Contact us</h4>
               <a
                 href="#contact"
@@ -120,7 +120,7 @@ export function Footer() {
               </a>
             </div>
             {/* Logo/Partner Box */}
-            <div className="flex h-32 items-center justify-center rounded-[2.5rem] border-[1.5px] border-white/20 bg-[#0A0A0A]">
+            <div className="flex h-32 items-center justify-center brutalist-card">
               <div className="h-8 w-auto opacity-50 grayscale invert transition-opacity hover:opacity-100">
                 <Logo />
               </div>

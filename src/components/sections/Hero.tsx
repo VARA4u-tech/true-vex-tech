@@ -33,7 +33,7 @@ export function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+            className="inline-flex items-center gap-2 rounded-full border-[2px] border-white/30 bg-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             Software Consultancy
@@ -95,7 +95,7 @@ export function Hero() {
         </div>
 
         {/* Stats */}
-        <div className="mt-24 grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-border bg-border md:grid-cols-3">
+        <div className="mt-24 grid grid-cols-1 gap-px overflow-hidden brutalist-card bg-border md:grid-cols-3">
           {STATS.map((s, i) => (
             <motion.div
               key={s.label}
@@ -103,7 +103,7 @@ export function Hero() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-background px-8 py-12 text-center"
+              className="bg-card px-8 py-12 text-center"
             >
               <div className="font-display text-5xl font-bold tracking-tight text-gradient md:text-6xl">
                 {s.value}

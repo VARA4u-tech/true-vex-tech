@@ -54,7 +54,7 @@ export function FinalCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group relative flex flex-col rounded-3xl border-[1.5px] border-border bg-card/50 p-8 backdrop-blur-sm transition-colors hover:border-primary/50"
+              className="group relative flex flex-col brutalist-card p-8 backdrop-blur-sm transition-colors hover:border-primary/50"
             >
               <h3 className="font-display text-sm font-bold uppercase tracking-widest text-primary">
                 {m.title}

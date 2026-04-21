@@ -85,7 +85,7 @@ export function Testimonials() {
           </div>
         </div>
 
-        <div className="mt-12 min-h-[320px] rounded-3xl border border-border bg-background p-10 md:p-16">
+        <div className="mt-12 min-h-[320px] brutalist-card p-10 md:p-16">
           <AnimatePresence mode="wait">
             <motion.div
               key={i}

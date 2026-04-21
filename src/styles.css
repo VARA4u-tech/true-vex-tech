@@ -98,6 +98,7 @@
   --destructive-foreground: oklch(0.99 0 0);
 
   --border: oklch(1 0 0 / 15%);
+  --border-white: rgba(255, 255, 255, 0.3);
   --input: oklch(1 0 0 / 12%);
   --ring: #0d7e9299;
 
@@ -106,6 +107,20 @@
   --chart-3: #119fb9;
   --chart-4: #08505d;
   --chart-5: #0d7e92;
+}
+
+@layer utilities {
+  .brutalist-card {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 2rem;
+    background-color: var(--card);
+  }
+  @media (min-width: 768px) {
+    .brutalist-card {
+      border-width: 2.5px;
+      border-radius: 2.5rem;
+    }
+  }
 }
 
 .dark {
