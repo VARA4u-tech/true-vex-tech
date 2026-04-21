@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const NAV = [
-  { label: "Home", href: "#", active: true },
-  { label: "Services", href: "#services" },
+  { label: "Home", to: "/" },
+  { label: "Services", to: "/services" },
 ];
 
 const MORE = [
@@ -32,14 +32,10 @@ export function Header() {
   }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 md:top-4 md:px-5`}
-    >
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 md:top-4 md:px-5`}>
       <div
         className={`mx-auto flex h-16 max-w-6xl items-center justify-between px-5 transition-all duration-500 md:rounded-full border border-white/20 shadow-lg shadow-black/5 ${
-          scrolled
-            ? "bg-background/70 backdrop-blur-xl"
-            : "bg-background/40 backdrop-blur-md"
+          scrolled ? "bg-background/70 backdrop-blur-xl" : "bg-background/40 backdrop-blur-md"
         }`}
       >
         <Link to="/" className="flex items-center">
@@ -48,22 +44,16 @@ export function Header() {
 
         <nav className="hidden items-center gap-1 lg:flex">
           {NAV.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
-              className={`group relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                item.active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-              }`}
+              to={item.to}
+              activeProps={{ className: "text-foreground" }}
+              inactiveProps={{ className: "text-muted-foreground hover:text-foreground" }}
+              className="group relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium transition-colors"
             >
-              <span
-                className={`absolute inset-0 z-0 transition-transform duration-150 ease-in-out ${
-                  item.active
-                    ? "bg-foreground/10 translate-y-0"
-                    : "bg-foreground/10 translate-y-full group-hover:translate-y-0"
-                }`}
-              />
+              <span className="absolute inset-0 z-0 translate-y-full bg-foreground/10 transition-transform duration-150 ease-in-out group-[.active]:translate-y-0 group-hover:translate-y-0" />
               <span className="relative z-10">{item.label}</span>
-            </a>
+            </Link>
           ))}
 
           <DropdownMenu>
@@ -71,12 +61,23 @@ export function Header() {
               <span className="absolute inset-0 z-0 translate-y-full bg-foreground/10 transition-transform duration-150 ease-in-out group-hover:translate-y-0" />
               <span className="relative z-10 flex items-center gap-1">
                 Company
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="transition-transform group-data-[state=open]:rotate-180">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  className="transition-transform group-data-[state=open]:rotate-180"
+                >
                   <path d="M6 9l6 6 6-6" />
                 </svg>
               </span>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 rounded-2xl border-white/20 bg-background/90 backdrop-blur-xl p-2">
+            <DropdownMenuContent
+              align="end"
+              className="w-48 rounded-2xl border-white/20 bg-background/90 backdrop-blur-xl p-2"
+            >
               {MORE.map((item) => (
                 <DropdownMenuItem key={item.label} asChild>
                   <a
@@ -116,13 +117,16 @@ export function Header() {
         <div className="border-t border-border bg-background lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col px-5 py-4">
             {NAV.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
-                className="rounded-lg px-3 py-3 text-base font-medium text-foreground hover:bg-muted"
+                to={item.to}
+                onClick={() => setOpen(false)}
+                activeProps={{ className: "bg-muted text-foreground" }}
+                inactiveProps={{ className: "text-foreground hover:bg-muted" }}
+                className="rounded-lg px-3 py-3 text-base font-medium transition-colors"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

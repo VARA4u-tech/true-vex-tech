@@ -62,9 +62,7 @@ export function StatBlocks() {
               <h3 className="font-display text-3xl font-bold leading-tight md:text-5xl">
                 {s.title}
               </h3>
-              <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
-                {s.body}
-              </p>
+              <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">{s.body}</p>
             </div>
           </motion.div>
         ))}

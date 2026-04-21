@@ -38,8 +38,8 @@ export function FinalCTA() {
             Flexible <span className="text-gradient">Engagement</span> Models
           </motion.h2>
           <p className="mx-auto mt-8 max-w-2xl text-lg text-muted-foreground">
-            We offer multiple ways to collaborate, ensuring the perfect fit for
-            your project's scope, budget, and timeline.
+            We offer multiple ways to collaborate, ensuring the perfect fit for your project's
+            scope, budget, and timeline.
           </p>
         </div>
 
@@ -60,7 +60,15 @@ export function FinalCTA() {
               <ul className="mt-8 flex-1 space-y-4">
                 {m.features.map((f) => (
                   <li key={f} className="flex items-center gap-3 text-muted-foreground">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-primary">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      className="text-primary"
+                    >
                       <path d="M20 6L9 17L4 12" />
                     </svg>
                     {f}

@@ -7,12 +7,7 @@ const COLS = [
   },
   {
     title: "Our Services",
-    links: [
-      "Software Development",
-      "Software Testing",
-      "DevOps Consulting",
-      "IT Staffing",
-    ],
+    links: ["Software Development", "Software Testing", "DevOps Consulting", "IT Staffing"],
   },
 ];
 
@@ -30,9 +25,17 @@ export function Footer() {
               <div>
                 <h4 className="font-display text-xl font-bold text-[#DFFF4F]">Services</h4>
                 <ul className="mt-8 space-y-4">
-                  {["Software Development", "Software Testing", "DevOps & Cloud", "IT Staffing"].map((l) => (
+                  {[
+                    "Software Development",
+                    "Software Testing",
+                    "DevOps & Cloud",
+                    "IT Staffing",
+                  ].map((l) => (
                     <li key={l}>
-                      <a href="#" className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white">
+                      <a
+                        href="#"
+                        className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white"
+                      >
                         {l}
                         <span className="absolute bottom-0 left-0 h-px w-0 bg-[#DFFF4F] transition-all duration-300 group-hover:w-full" />
                       </a>
@@ -43,22 +46,36 @@ export function Footer() {
               <div>
                 <h4 className="font-display text-xl font-bold text-[#DFFF4F]">Company</h4>
                 <ul className="mt-8 space-y-4">
-                  {["About Us", "Our Approach", "Success Stories", "Careers", "Contact"].map((l) => (
-                    <li key={l}>
-                      <a href="#" className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white">
-                        {l}
-                        <span className="absolute bottom-0 left-0 h-px w-0 bg-[#DFFF4F] transition-all duration-300 group-hover:w-full" />
-                      </a>
-                    </li>
-                  ))}
+                  {["About Us", "Our Approach", "Success Stories", "Careers", "Contact"].map(
+                    (l) => (
+                      <li key={l}>
+                        <a
+                          href="#"
+                          className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white"
+                        >
+                          {l}
+                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#DFFF4F] transition-all duration-300 group-hover:w-full" />
+                        </a>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
               <div>
                 <h4 className="font-display text-xl font-bold text-[#DFFF4F]">Resources</h4>
                 <ul className="mt-8 space-y-4">
-                  {["Technical Blog", "Documentation", "Case Studies", "Support Center", "Privacy Policy"].map((l) => (
+                  {[
+                    "Technical Blog",
+                    "Documentation",
+                    "Case Studies",
+                    "Support Center",
+                    "Privacy Policy",
+                  ].map((l) => (
                     <li key={l}>
-                      <a href="#" className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white">
+                      <a
+                        href="#"
+                        className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white"
+                      >
                         {l}
                         <span className="absolute bottom-0 left-0 h-px w-0 bg-[#DFFF4F] transition-all duration-300 group-hover:w-full" />
                       </a>
@@ -81,7 +98,10 @@ export function Footer() {
                 Get Started
               </a>
               <p className="mt-6 text-sm text-gray-400">Or email us at</p>
-              <a href="mailto:info@truevextech.com" className="mt-1 text-sm font-medium hover:text-[#DFFF4F] transition-colors">
+              <a
+                href="mailto:info@truevextech.com"
+                className="mt-1 text-sm font-medium hover:text-[#DFFF4F] transition-colors"
+              >
                 info@truevextech.com
               </a>
             </div>
@@ -101,7 +121,7 @@ export function Footer() {
               TrueVex<span className="text-[#DFFF4F]">.</span>
             </h2>
           </div>
-          
+
           <div className="grid w-full grid-cols-2 gap-3 lg:w-auto">
             {[
               { label: "LinkedIn", icon: "in" },
@@ -116,7 +136,7 @@ export function Footer() {
               >
                 {/* Slide Background */}
                 <span className="absolute inset-0 z-0 translate-y-full bg-[#DFFF4F] transition-transform duration-150 ease-in-out group-hover:translate-y-0" />
-                
+
                 <span className="relative z-10 text-xs font-bold uppercase tracking-widest text-gray-400 transition-colors group-hover:text-black">
                   {s.label}
                 </span>

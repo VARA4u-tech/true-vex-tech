@@ -32,8 +32,8 @@ export function MarketingCTA() {
             </div>
             <div className="flex flex-col items-start gap-6 md:items-end">
               <p className="max-w-md text-base text-white/90 md:text-right">
-                Get noticed by our community and turn interested browsers into
-                new customers — across email, app, and on-site placements.
+                Get noticed by our community and turn interested browsers into new customers —
+                across email, app, and on-site placements.
               </p>
               <a
                 href="#"

@@ -47,7 +47,14 @@ export function Testimonials() {
               aria-label="Previous"
               className="grid h-12 w-12 place-items-center rounded-full border border-border bg-background transition-colors hover:border-primary hover:text-primary"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
                 <path d="M15 18l-6-6 6-6" />
               </svg>
             </button>
@@ -56,7 +63,14 @@ export function Testimonials() {
               aria-label="Next"
               className="grid h-12 w-12 place-items-center rounded-full border border-border bg-background transition-colors hover:border-primary hover:text-primary"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
                 <path d="M9 18l6-6-6-6" />
               </svg>
             </button>
@@ -89,9 +103,7 @@ export function Testimonials() {
                   {q.name.charAt(0)}
                 </div>
                 <div>
-                  <div className="font-display text-base font-bold">
-                    {q.name}
-                  </div>
+                  <div className="font-display text-base font-bold">{q.name}</div>
                   <div className="text-sm text-muted-foreground">{q.role}</div>
                 </div>
               </div>

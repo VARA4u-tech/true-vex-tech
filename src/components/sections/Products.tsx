@@ -2,36 +2,40 @@ import { motion } from "framer-motion";
 
 const PRODUCTS = [
   {
-    tag: "Development",
+    tag: "Engineering",
     title: "Software Development",
     description:
-      "Building custom applications, web, and mobile solutions tailored to your business needs with modern frameworks and scalable architecture.",
+      "Building robust, scalable, and secure software solutions tailored to your unique business requirements. Our expertise spans Web, Mobile, Cloud-native, and API development.",
     href: "#",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop",
   },
   {
     tag: "Quality",
     title: "Software Testing",
     description:
-      "Ensuring the quality, reliability, and performance of your software with comprehensive manual and automated testing strategies.",
+      "Ensuring the quality, reliability, and security of your software through rigorous testing methodologies including Automation, Performance, and Security testing.",
     href: "#",
-    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=2128&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=2128&auto=format&fit=crop",
   },
   {
-    tag: "Infrastructure",
-    title: "DevOps & Cloud",
+    tag: "Efficiency",
+    title: "DevOps Consulting",
     description:
-      "Streamlining your development lifecycle and optimizing infrastructure for scalability, security, and maximum efficiency.",
+      "Streamlining your development lifecycle with CI/CD, Infrastructure as Code (IaC), and Cloud Migration to optimize scalability and maximum performance.",
     href: "#",
-    image: "https://images.unsplash.com/photo-1667372333374-0d449ac7bc0b?q=80&w=2070&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1667372333374-0d449ac7bc0b?q=80&w=2070&auto=format&fit=crop",
   },
   {
-    tag: "Talent",
+    tag: "Resources",
     title: "IT Staffing",
     description:
-      "Providing access to top-tier technical talent to augment your internal team and accelerate your project delivery timelines.",
+      "Access top-tier IT talent exactly when you need it. We provide skilled professionals via Contract Staffing, Dedicated Teams, and Permanent Placement solutions.",
     href: "#",
-    image: "https://images.unsplash.com/photo-1521737706234-2803fcaf542a?q=80&w=2070&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1521737706234-2803fcaf542a?q=80&w=2070&auto=format&fit=crop",
   },
 ];
 
@@ -40,16 +44,13 @@ export function Products() {
     <section id="services" className="relative py-28 md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="max-w-3xl">
-          <span className="text-xs uppercase tracking-[0.25em] text-primary">
-            Our Expertise
-          </span>
+          <span className="text-xs uppercase tracking-[0.25em] text-primary">Our Expertise</span>
           <h2 className="font-display mt-4 text-balance text-4xl font-bold leading-[1.05] md:text-6xl">
             Your Advantage through Technology
           </h2>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            We deliver cutting-edge solutions across the entire software
-            lifecycle, from initial concept to high-performance production
-            environments.
+            We deliver cutting-edge solutions across the entire software lifecycle, from initial
+            concept to high-performance production environments.
           </p>
         </div>
 
@@ -77,12 +78,8 @@ export function Products() {
                 </div>
               </div>
               <div className="p-8 md:p-10">
-                <h3 className="font-display text-3xl font-bold md:text-4xl">
-                  {p.title}
-                </h3>
-                <p className="mt-4 text-base text-muted-foreground">
-                  {p.description}
-                </p>
+                <h3 className="font-display text-3xl font-bold md:text-4xl">{p.title}</h3>
+                <p className="mt-4 text-base text-muted-foreground">{p.description}</p>
                 <a
                   href={p.href}
                   className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary-glow"

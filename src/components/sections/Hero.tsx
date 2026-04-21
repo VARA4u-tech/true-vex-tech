@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { LampContainer } from "@/components/ui/lamp";
 
 const STATS = [
   { value: "60%", label: "Data efficiency gain" },
@@ -10,19 +11,13 @@ const HEADLINE = "Innovate. Develop. Accelerate. Your future.".split(" ");
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 md:pt-40">
-      {/* glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-[700px] w-[1100px] -translate-x-1/2 rounded-full opacity-60 blur-3xl"
-        style={{ background: "var(--gradient-radial)" }}
-      />
-
+    <LampContainer className="pt-8 md:pt-12">
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <div className="mx-auto max-w-5xl text-center">
           <motion.span
             initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
           >
@@ -35,7 +30,8 @@ export function Hero() {
               <motion.span
                 key={`${word}-${i}`}
                 initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
                 transition={{
                   duration: 0.7,
                   delay: 0.05 * i,
@@ -43,28 +39,26 @@ export function Hero() {
                 }}
                 className="mr-3 inline-block md:mr-5"
               >
-                {word === "Accelerate." ? (
-                  <span className="text-gradient">{word}</span>
-                ) : (
-                  word
-                )}
+                {word === "Accelerate." ? <span className="text-gradient">{word}</span> : word}
               </motion.span>
             ))}
           </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mx-auto mt-8 max-w-2xl text-balance text-lg text-muted-foreground md:text-xl"
           >
-            Leading software consultancy committed to delivering cutting-edge
-            solutions that drive business growth and operational excellence.
+            Leading software consultancy committed to delivering cutting-edge solutions that drive
+            business growth and operational excellence.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.55 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
@@ -115,6 +109,6 @@ export function Hero() {
           ))}
         </div>
       </div>
-    </section>
+    </LampContainer>
   );
 }
