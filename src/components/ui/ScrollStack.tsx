@@ -64,6 +64,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   const animationFrameRef = useRef<number | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const cardsRef = useRef<StyledElement[]>([]);
+  const cardOffsetsRef = useRef<number[]>([]);
+  const endElementOffsetRef = useRef<number>(0);
   const lastTransformsRef = useRef<Map<number, TransformData>>(new Map());
   const isUpdatingRef = useRef(false);
 
@@ -124,12 +126,12 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       ? document.querySelector(".scroll-stack-end")
       : scrollerRef.current?.querySelector(".scroll-stack-end");
 
-    const endElementTop = endElement ? getElementOffset(endElement as HTMLElement) : 0;
+    const endElementTop = endElementOffsetRef.current;
 
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
 
-      const cardTop = getElementOffset(card);
+      const cardTop = cardOffsetsRef.current[i] || 0;
       const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
       const triggerEnd = cardTop - scaleEndPositionPx;
       const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
@@ -144,7 +146,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       if (blurAmount) {
         let topCardIndex = 0;
         for (let j = 0; j < cardsRef.current.length; j++) {
-          const jCardTop = getElementOffset(cardsRef.current[j]);
+          const jCardTop = cardOffsetsRef.current[j] || 0;
           const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
           if (scrollTop >= jTriggerStart) {
             topCardIndex = j;
@@ -171,7 +173,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       if (true) {
         let topCardIndex = 0;
         for (let j = 0; j < cardsRef.current.length; j++) {
-          const jCardTop = getElementOffset(cardsRef.current[j]);
+          const jCardTop = cardOffsetsRef.current[j] || 0;
           const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
           if (scrollTop >= jTriggerStart) {
             topCardIndex = j;
@@ -240,32 +242,43 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     getElementOffset,
   ]);
 
+  const updateOffsets = useCallback(() => {
+    if (!cardsRef.current.length) return;
+
+    // Temporarily remove transforms to get accurate original positions
+    cardsRef.current.forEach((card) => {
+      card.style.transform = "none";
+    });
+
+    const endElement = useWindowScroll
+      ? document.querySelector(".scroll-stack-end")
+      : scrollerRef.current?.querySelector(".scroll-stack-end");
+
+    if (endElement) {
+      endElementOffsetRef.current = getElementOffset(endElement as HTMLElement);
+    }
+
+    cardOffsetsRef.current = cardsRef.current.map((card) => getElementOffset(card));
+
+    // Restore transforms via the next updateCardTransforms call
+    lastTransformsRef.current.clear();
+    updateCardTransforms();
+  }, [getElementOffset, updateCardTransforms, useWindowScroll]);
+
   const handleScroll = useCallback(() => {
     updateCardTransforms();
   }, [updateCardTransforms]);
 
   const setupLenis = useCallback(() => {
     if (useWindowScroll) {
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        touchMultiplier: 2,
-        infinite: false,
-        lerp: 0.1,
-        syncTouch: true,
-      });
-
-      lenis.on("scroll", handleScroll);
-
-      const raf = (time: number) => {
-        lenis.raf(time);
-        animationFrameRef.current = requestAnimationFrame(raf);
+      const checkScroll = () => {
+        handleScroll();
+        animationFrameRef.current = requestAnimationFrame(checkScroll);
       };
-      animationFrameRef.current = requestAnimationFrame(raf);
+      animationFrameRef.current = requestAnimationFrame(checkScroll);
 
-      lenisRef.current = lenis;
-      return lenis;
+      // We don't use Lenis for window scroll to avoid hijacking the entire page's native scroll
+      return null;
     } else {
       const scroller = scrollerRef.current;
       if (!scroller) return;
@@ -322,11 +335,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       card.style.webkitPerspective = "1000px";
     });
 
+    updateOffsets();
     setupLenis();
 
-    updateCardTransforms();
+    window.addEventListener("resize", updateOffsets);
 
     return () => {
+      window.removeEventListener("resize", updateOffsets);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
