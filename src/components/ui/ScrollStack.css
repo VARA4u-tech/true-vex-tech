@@ -35,6 +35,32 @@
   position: relative;
   background: var(--card);
   border: 1.5px solid var(--border);
+
+  /* Reveal logic */
+  --reveal: 0;
+}
+
+.scroll-stack-reveal-content {
+  opacity: var(--reveal);
+  transform: translateY(calc(30px * (1 - var(--reveal))));
+  transition:
+    opacity 0.1s linear,
+    transform 0.1s linear;
+}
+
+.reveal-stagger-1 {
+  opacity: clamp(0, calc((var(--reveal) - 0.2) / 0.8), 1);
+  transform: translateY(calc(20px * (1 - clamp(0, calc((var(--reveal) - 0.2) / 0.8), 1))));
+}
+
+.reveal-stagger-2 {
+  opacity: clamp(0, calc((var(--reveal) - 0.4) / 0.6), 1);
+  transform: translateY(calc(20px * (1 - clamp(0, calc((var(--reveal) - 0.4) / 0.6), 1))));
+}
+
+.reveal-stagger-3 {
+  opacity: clamp(0, calc((var(--reveal) - 0.6) / 0.4), 1);
+  transform: translateY(calc(20px * (1 - clamp(0, calc((var(--reveal) - 0.6) / 0.4), 1))));
 }
 
 .scroll-stack-end {

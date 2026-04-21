@@ -133,6 +133,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
       const cardTop = cardOffsetsRef.current[i] || 0;
       const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
+      const revealStart = triggerStart - 300; // Start revealing slightly earlier
+      const revealEnd = triggerStart + 100;
+      const revealProgress = Math.min(
+        1,
+        Math.max(0, (scrollTop - revealStart) / (revealEnd - revealStart)),
+      );
+
       const triggerEnd = cardTop - scaleEndPositionPx;
       const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
       const pinEnd = endElementTop - containerHeight / 2;
@@ -210,6 +217,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
         card.style.transform = transform;
         card.style.filter = filter;
+        card.style.setProperty("--reveal", revealProgress.toString());
 
         lastTransformsRef.current.set(i, newTransform);
       }

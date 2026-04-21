@@ -18,6 +18,19 @@ export function Footer() {
   return (
     <footer className="relative bg-black py-20 text-white">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
+        {/* Brand Cyan CTA Bar */}
+        <div className="mb-10 flex flex-col items-center justify-between gap-6 rounded-full bg-[#0D7E92] p-4 pl-12 pr-4 md:flex-row">
+          <h3 className="font-display text-xl font-bold text-white md:text-2xl">
+            Join the TrueVex Enterprise Network
+          </h3>
+          <a
+            href="#contact"
+            className="rounded-full bg-black px-10 py-4 text-sm font-bold text-white transition-transform hover:scale-105"
+          >
+            Send request
+          </a>
+        </div>
+
         {/* Top Grid */}
         <div className="grid gap-4 lg:grid-cols-[1fr_0.4fr]">
           {/* Main Links Box */}
