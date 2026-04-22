@@ -186,6 +186,7 @@ export function Footer() {
               },
               {
                 label: "Twitter",
+                href: "https://x.com/truevextech",
                 icon: (
                   <svg
                     width="16"
