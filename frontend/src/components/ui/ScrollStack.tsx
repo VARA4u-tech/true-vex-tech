@@ -53,7 +53,6 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   stackPosition = "20%",
   scaleEndPosition = "10%",
   baseScale = 0.85,
-  scaleDuration = 0.5,
   rotationAmount = 0,
   blurAmount = 0,
   useWindowScroll = false,
@@ -121,19 +120,26 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     const { scrollTop, containerHeight } = getScrollData();
     const stackPositionPx = parsePercentage(stackPosition, containerHeight);
     const scaleEndPositionPx = parsePercentage(scaleEndPosition, containerHeight);
-
-    const endElement = useWindowScroll
-      ? document.querySelector(".scroll-stack-end")
-      : scrollerRef.current?.querySelector(".scroll-stack-end");
-
     const endElementTop = endElementOffsetRef.current;
+
+    const isMobile = window.innerWidth < 768;
+
+    // Calculate top card index once per frame
+    let topCardIndex = 0;
+    for (let j = 0; j < cardsRef.current.length; j++) {
+      const jCardTop = cardOffsetsRef.current[j] || 0;
+      const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
+      if (scrollTop >= jTriggerStart) {
+        topCardIndex = j;
+      }
+    }
 
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
 
       const cardTop = cardOffsetsRef.current[i] || 0;
       const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
-      const revealStart = triggerStart - 300; // Start revealing slightly earlier
+      const revealStart = triggerStart - 300;
       const revealEnd = triggerStart + 100;
       const revealProgress = Math.min(
         1,
@@ -149,17 +155,9 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       const scale = 1 - scaleProgress * (1 - targetScale);
       const rotation = rotationAmount ? i * rotationAmount * scaleProgress : 0;
 
+      // Blur is expensive on mobile, skip it
       let blur = 0;
-      if (blurAmount) {
-        let topCardIndex = 0;
-        for (let j = 0; j < cardsRef.current.length; j++) {
-          const jCardTop = cardOffsetsRef.current[j] || 0;
-          const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
-          if (scrollTop >= jTriggerStart) {
-            topCardIndex = j;
-          }
-        }
-
+      if (blurAmount && !isMobile) {
         if (i < topCardIndex) {
           const depthInStack = topCardIndex - i;
           blur = Math.max(0, depthInStack * blurAmount);
@@ -176,17 +174,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       }
 
       let brightness = 1;
-      // eslint-disable-next-line no-constant-condition
-      if (true) {
-        let topCardIndex = 0;
-        for (let j = 0; j < cardsRef.current.length; j++) {
-          const jCardTop = cardOffsetsRef.current[j] || 0;
-          const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
-          if (scrollTop >= jTriggerStart) {
-            topCardIndex = j;
-          }
-        }
-
+      // Skip brightness calculation if on mobile for extra FPS
+      if (!isMobile) {
         if (i < topCardIndex) {
           const depthInStack = topCardIndex - i;
           brightness = Math.max(0.6, 1 - depthInStack * 0.1);
@@ -212,11 +201,16 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
       if (hasChanged) {
         const transform = `translate3d(0, ${newTransform.translateY}px, 0) scale(${newTransform.scale}) rotate(${newTransform.rotation}deg)`;
-        let filter = `brightness(${newTransform.brightness})`;
-        if (newTransform.blur > 0) filter += ` blur(${newTransform.blur}px)`;
+
+        // Optimize filter string construction
+        let filter = "";
+        if (!isMobile) {
+          filter = `brightness(${newTransform.brightness})`;
+          if (newTransform.blur > 0) filter += ` blur(${newTransform.blur}px)`;
+        }
 
         card.style.transform = transform;
-        card.style.filter = filter;
+        if (filter) card.style.filter = filter;
         card.style.setProperty("--reveal", revealProgress.toString());
 
         lastTransformsRef.current.set(i, newTransform);
@@ -247,13 +241,11 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     calculateProgress,
     parsePercentage,
     getScrollData,
-    getElementOffset,
   ]);
 
   const updateOffsets = useCallback(() => {
     if (!cardsRef.current.length) return;
 
-    // Temporarily remove transforms to get accurate original positions
     cardsRef.current.forEach((card) => {
       card.style.transform = "none";
     });
@@ -268,43 +260,38 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
     cardOffsetsRef.current = cardsRef.current.map((card) => getElementOffset(card));
 
-    // Restore transforms via the next updateCardTransforms call
     lastTransformsRef.current.clear();
     updateCardTransforms();
   }, [getElementOffset, updateCardTransforms, useWindowScroll]);
 
-  const handleScroll = useCallback(() => {
-    updateCardTransforms();
-  }, [updateCardTransforms]);
-
   const setupLenis = useCallback(() => {
     if (useWindowScroll) {
       const checkScroll = () => {
-        handleScroll();
+        updateCardTransforms();
         animationFrameRef.current = requestAnimationFrame(checkScroll);
       };
       animationFrameRef.current = requestAnimationFrame(checkScroll);
-
-      // We don't use Lenis for window scroll to avoid hijacking the entire page's native scroll
       return null;
     } else {
       const scroller = scrollerRef.current;
       if (!scroller) return;
 
+      const isMobile = window.innerWidth < 768;
+
       const lenis = new Lenis({
         wrapper: scroller,
         content: scroller.querySelector(".scroll-stack-inner") as HTMLElement,
-        duration: 1.2,
+        duration: isMobile ? 0.8 : 1.2, // Faster duration on mobile
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        touchMultiplier: 2,
+        touchMultiplier: 1.5,
         infinite: false,
         gestureOrientation: "vertical",
-        lerp: 0.1,
-        syncTouch: true,
+        lerp: isMobile ? 0.15 : 0.1, // Higher lerp on mobile for responsiveness
+        syncTouch: false, // Disable syncTouch for native feel on mobile
       });
 
-      lenis.on("scroll", handleScroll);
+      lenis.on("scroll", updateCardTransforms);
 
       const raf = (time: number) => {
         lenis.raf(time);
@@ -315,7 +302,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       lenisRef.current = lenis;
       return lenis;
     }
-  }, [handleScroll, useWindowScroll]);
+  }, [updateCardTransforms, useWindowScroll]);
 
   useLayoutEffect(() => {
     const scroller = scrollerRef.current;
@@ -334,13 +321,10 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       if (i < cards.length - 1) {
         card.style.marginBottom = `${itemDistance}px`;
       }
-      card.style.willChange = "transform, filter";
+      card.style.willChange = "transform";
       card.style.transformOrigin = "top center";
       card.style.backfaceVisibility = "hidden";
       card.style.transform = "translateZ(0)";
-      card.style.webkitTransform = "translateZ(0)";
-      card.style.perspective = "1000px";
-      card.style.webkitPerspective = "1000px";
     });
 
     updateOffsets();
@@ -368,20 +352,18 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     stackPosition,
     scaleEndPosition,
     baseScale,
-    scaleDuration,
     rotationAmount,
     blurAmount,
     useWindowScroll,
     onStackComplete,
     setupLenis,
-    updateCardTransforms,
+    updateOffsets,
   ]);
 
   return (
     <div className={`scroll-stack-scroller ${className}`.trim()} ref={scrollerRef}>
       <div className="scroll-stack-inner">
         {children}
-        {/* Spacer so the last pin can release cleanly */}
         <div className="scroll-stack-end" />
       </div>
     </div>
