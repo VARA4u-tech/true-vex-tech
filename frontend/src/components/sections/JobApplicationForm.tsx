@@ -87,7 +87,7 @@ export function JobApplicationForm({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-card text-white p-0 border border-white/10 shadow-2xl">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-card text-white p-0 border border-white/10 shadow-2xl rounded-3xl">
         <div className="p-8 md:p-12">
           <div className="flex flex-col items-center text-center mb-10">
             <Logo />
