@@ -148,6 +148,7 @@ export function Footer() {
             {[
               {
                 label: "LinkedIn",
+                href: "https://www.linkedin.com/company/truevex-technologies-pvt-ltd/",
                 icon: (
                   <svg
                     width="16"
