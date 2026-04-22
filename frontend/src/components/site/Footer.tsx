@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Logo } from "./Logo";
 import logo from "@/assets/logo.png";
 import { Link } from "@tanstack/react-router";
@@ -253,6 +254,79 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Blue Plasma Flames Effect */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden pointer-events-none opacity-40">
+        <svg
+          className="absolute bottom-0 left-0 w-full h-full"
+          preserveAspectRatio="none"
+          viewBox="0 0 1440 320"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="flame-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+              <stop offset="0%" stopColor="#0D7E92" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#0D7E92" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#0D7E92" stopOpacity="0" />
+            </linearGradient>
+            <filter id="flame-blur">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+            </filter>
+          </defs>
+          <motion.path
+            initial={{
+              d: "M0,320 L1440,320 L1440,160 C1200,280 960,0 720,160 C480,320 240,0 0,160 Z",
+            }}
+            animate={{
+              d: [
+                "M0,320 L1440,320 L1440,160 C1200,280 960,0 720,160 C480,320 240,0 0,160 Z",
+                "M0,320 L1440,320 L1440,200 C1200,100 960,300 720,100 C480,300 240,100 0,200 Z",
+                "M0,320 L1440,320 L1440,160 C1200,280 960,0 720,160 C480,320 240,0 0,160 Z",
+              ],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            fill="url(#flame-gradient)"
+            filter="url(#flame-blur)"
+          />
+          <motion.path
+            initial={{
+              d: "M0,320 L1440,320 L1440,200 C1200,100 960,300 720,100 C480,300 240,100 0,200 Z",
+            }}
+            animate={{
+              d: [
+                "M0,320 L1440,320 L1440,200 C1200,100 960,300 720,100 C480,300 240,100 0,200 Z",
+                "M0,320 L1440,320 L1440,160 C1200,280 960,0 720,160 C480,320 240,0 0,160 Z",
+                "M0,320 L1440,320 L1440,200 C1200,100 960,300 720,100 C480,300 240,100 0,200 Z",
+              ],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+            fill="url(#flame-gradient)"
+            stopOpacity="0.5"
+            filter="url(#flame-blur)"
+          />
+        </svg>
+      </div>
+
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        @keyframes flicker {
+          0% { opacity: 0.4; transform: scaleY(1); }
+          50% { opacity: 0.6; transform: scaleY(1.05); }
+          100% { opacity: 0.4; transform: scaleY(1); }
+        }
+      `,
+        }}
+      />
     </footer>
   );
 }
