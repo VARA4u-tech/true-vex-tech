@@ -25,55 +25,11 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TrueVex Technologies | Innovative Software Solutions" },
-      {
-        name: "description",
-        content:
-          "Leading software consultancy committed to delivering cutting-edge solutions that drive business growth and operational excellence.",
-      },
-      { name: "author", content: "TrueVex Technologies" },
-      { property: "og:title", content: "TrueVex Technologies" },
-      { property: "og:description", content: "Innovative Software Solutions & Consultancy" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [
-      { rel: "icon", href: "/favicon.ico" },
-      { rel: "icon", href: "/logo.png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <head suppressHydrationWarning>
-        <HeadContent />
-      </head>
-      <body suppressHydrationWarning>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
+
 
 function RootComponent() {
   return <Outlet />;
