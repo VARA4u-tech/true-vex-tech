@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
 
 import {
@@ -23,6 +24,7 @@ const MORE = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -56,37 +58,55 @@ export function Header() {
               </Link>
             ))}
 
-            <DropdownMenu>
-              <DropdownMenuTrigger className="group flex items-center gap-1 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary outline-none">
+            <div
+              className="relative"
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
+            >
+              <button
+                className={`group flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors outline-none ${
+                  dropdownOpen ? "text-primary" : "text-muted-foreground hover:text-primary"
+                }`}
+              >
                 Company
-                <svg
+                <motion.svg
                   width="12"
                   height="12"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="3"
-                  className="transition-transform group-data-[state=open]:rotate-180"
+                  strokeWidth="3.5"
+                  animate={{ rotate: dropdownOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <path d="M6 9l6 6 6-6" />
-                </svg>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="w-48 rounded-2xl border-white/20 bg-background/90 backdrop-blur-xl p-2"
-              >
-                {MORE.map((item) => (
-                  <DropdownMenuItem key={item.label} asChild>
-                    <a
-                      href={item.href}
-                      className="flex cursor-pointer items-center rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground outline-none"
-                    >
-                      {item.label}
-                    </a>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                </motion.svg>
+              </button>
+
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="absolute left-1/2 top-full -translate-x-1/2 pt-2"
+                  >
+                    <div className="w-48 overflow-hidden rounded-2xl border border-white/20 bg-background/90 p-2 shadow-2xl backdrop-blur-xl">
+                      {MORE.map((item) => (
+                        <a
+                          key={item.label}
+                          href={item.href}
+                          className="flex cursor-pointer items-center rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary outline-none"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </nav>
         </div>
 

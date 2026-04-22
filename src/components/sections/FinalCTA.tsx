@@ -36,7 +36,7 @@ export function FinalCTA() {
             scrollEnd="bottom bottom-=40%"
             stagger={0.03}
             containerClassName="mt-0"
-            textClassName="font-display text-balance text-5xl font-bold leading-[0.98] md:text-7xl"
+            textClassName="font-display text-balance text-2xl font-bold leading-tight sm:text-3xl md:text-5xl lg:text-7xl"
           >
             Flexible Engagement Models
           </ScrollFloat>
@@ -46,7 +46,7 @@ export function FinalCTA() {
           </p>
         </div>
 
-        <div className="mt-20 grid gap-6 md:grid-cols-3">
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {MODELS.map((m, i) => (
             <motion.div
               key={m.title}
@@ -54,7 +54,7 @@ export function FinalCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group relative flex flex-col brutalist-card p-8 backdrop-blur-sm transition-colors hover:border-primary/50"
+              className="group relative flex flex-col brutalist-card p-6 md:p-8 backdrop-blur-sm transition-colors hover:border-primary/50"
             >
               <h3 className="font-display text-sm font-bold uppercase tracking-widest text-primary">
                 {m.title}

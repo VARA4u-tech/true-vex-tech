@@ -150,6 +150,16 @@
     background-color: color-mix(in oklab, var(--primary) 60%, transparent);
     color: var(--primary-foreground);
   }
+
+  /* Hide Scrollbar for an immersive feel */
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 @layer utilities {

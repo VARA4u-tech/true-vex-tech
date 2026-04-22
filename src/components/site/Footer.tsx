@@ -19,7 +19,7 @@ export function Footer() {
     <footer className="relative bg-black py-20 text-white">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         {/* Brand Cyan CTA Bar */}
-        <div className="mb-10 flex flex-col items-center justify-between gap-6 rounded-full bg-[#0D7E92] p-4 pl-12 pr-4 md:flex-row">
+        <div className="mb-10 flex flex-col items-center justify-between gap-6 rounded-3xl md:rounded-full bg-[#0D7E92] p-6 md:p-4 md:pl-12 md:pr-4 md:flex-row text-center md:text-left">
           <h3 className="font-display text-xl font-bold text-white md:text-2xl">
             Join the TrueVex Enterprise Network
           </h3>
@@ -35,7 +35,7 @@ export function Footer() {
         <div className="grid gap-4 lg:grid-cols-[1fr_0.4fr]">
           {/* Main Links Box */}
           <div className="brutalist-card p-10 md:p-16">
-            <div className="grid gap-12 sm:grid-cols-3">
+            <div className="grid gap-12 grid-cols-1 md:grid-cols-3">
               <div>
                 <h4 className="font-display text-xl font-bold text-[#0D7E92]">Services</h4>
                 <ul className="mt-8 space-y-4">
@@ -121,7 +121,7 @@ export function Footer() {
             </div>
             {/* Logo/Partner Box */}
             <div className="flex h-32 items-center justify-center brutalist-card">
-              <div className="h-8 w-auto opacity-50 grayscale invert transition-opacity hover:opacity-100">
+              <div className="opacity-80 transition-opacity hover:opacity-100">
                 <Logo />
               </div>
             </div>
@@ -134,11 +134,13 @@ export function Footer() {
             <img
               src={logo}
               alt="TrueVex Logo"
-              className="h-16 w-auto md:h-24 lg:h-32 object-contain"
+              className="h-16 w-auto md:h-24 lg:h-32 object-contain brightness-0 invert"
             />
-            <h2 className="font-display font-bold leading-none tracking-tighter text-white">
-              <span className="text-[10vw] lg:text-[100px]">TrueVex</span>
-              <span className="ml-2 text-[4vw] lg:text-[40px] text-[#0D7E92]">Technologies</span>
+            <h2 className="font-display font-bold leading-none tracking-tighter text-white flex flex-col md:flex-row items-center md:items-end">
+              <span className="text-[15vw] md:text-[10vw] lg:text-[100px]">TrueVex</span>
+              <span className="md:ml-2 text-[6vw] md:text-[4vw] lg:text-[40px] text-[#0D7E92]">
+                Technologies
+              </span>
             </h2>
           </div>
 
@@ -220,7 +222,7 @@ export function Footer() {
               <a
                 key={s.label}
                 href="#"
-                className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full border border-white/10 bg-[#0A0A0A] px-8 py-5 transition-colors"
+                className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full border border-white/10 bg-[#0A0A0A] px-4 py-4 md:px-8 md:py-5 transition-colors"
               >
                 <span className="absolute inset-0 z-0 translate-y-full bg-[#0D7E92] transition-transform duration-150 ease-in-out group-hover:translate-y-0" />
                 <span className="relative z-10 text-gray-400 transition-colors group-hover:text-black">
