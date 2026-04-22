@@ -13,11 +13,11 @@ export const LampContainer = ({
   return (
     <div
       className={cn(
-        "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background w-full rounded-md z-0",
+        "relative flex min-h-screen flex-col items-center justify-start overflow-hidden bg-background w-full rounded-md z-0",
         className,
       )}
     >
-      <div className="relative flex w-full flex-1 items-start justify-center isolate z-0 pt-20">
+      <div className="relative flex w-full flex-1 items-start justify-center isolate z-0 pt-32 md:pt-40">
         {/* Right Cone */}
         <motion.div
           initial={{ opacity: 0.5, width: "20vw" }}
@@ -91,7 +91,7 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[15rem] bg-background"></div>
       </div>
 
-      <div className="relative z-50 flex translate-y-10 flex-col items-center px-5 w-full">
+      <div className="relative z-50 flex translate-y-16 md:-translate-y-12 lg:-translate-y-24 flex-col items-center px-5 w-full">
         {children}
       </div>
     </div>

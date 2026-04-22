@@ -14,7 +14,7 @@ export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <LampContainer className="pt-8 md:pt-12">
+    <LampContainer className="pt-0 pb-20 md:pb-32">
       <LightRays
         raysOrigin="top-center"
         raysColor="#ffffff"
