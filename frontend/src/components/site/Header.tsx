@@ -13,11 +13,11 @@ import {
 const NAV = [
   { label: "Home", to: "/" },
   { label: "Services", to: "/services" },
+  { label: "Careers", to: "/career" },
 ];
 
 const MORE = [
   { label: "About Us", to: "#" },
-  { label: "Careers", to: "/career" },
   { label: "Contact", to: "#contact" },
 ];
 
