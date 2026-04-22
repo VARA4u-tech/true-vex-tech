@@ -29,8 +29,6 @@ export const Route = createRootRoute({
   notFoundComponent: NotFoundComponent,
 });
 
-
-
 function RootComponent() {
   return <Outlet />;
 }
