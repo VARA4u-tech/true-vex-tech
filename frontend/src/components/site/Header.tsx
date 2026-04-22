@@ -16,9 +16,9 @@ const NAV = [
 ];
 
 const MORE = [
-  { label: "About Us", href: "#" },
-  { label: "Careers", href: "#" },
-  { label: "Contact", href: "#contact" },
+  { label: "About Us", to: "#" },
+  { label: "Careers", to: "/career" },
+  { label: "Contact", to: "#contact" },
 ];
 
 export function Header() {
@@ -94,13 +94,14 @@ export function Header() {
                   >
                     <div className="w-48 overflow-hidden rounded-2xl border border-white/20 bg-background/90 p-2 shadow-2xl backdrop-blur-xl">
                       {MORE.map((item) => (
-                        <a
+                        <Link
                           key={item.label}
-                          href={item.href}
+                          to={item.to}
+                          onClick={() => setDropdownOpen(false)}
                           className="flex cursor-pointer items-center rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary outline-none"
                         >
                           {item.label}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </motion.div>

@@ -1,5 +1,6 @@
 import { Logo } from "./Logo";
 import logo from "@/assets/logo.png";
+import { Link } from "@tanstack/react-router";
 
 const COLS = [
   {
@@ -46,13 +47,13 @@ export function Footer() {
                     "IT Staffing",
                   ].map((l) => (
                     <li key={l}>
-                      <a
-                        href="#"
+                      <Link
+                        to="/services"
                         className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white"
                       >
                         {l}
                         <span className="absolute bottom-0 left-0 h-px w-0 bg-[#0D7E92] transition-all duration-300 group-hover:w-full" />
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -60,19 +61,23 @@ export function Footer() {
               <div>
                 <h4 className="font-display text-xl font-bold text-[#0D7E92]">Company</h4>
                 <ul className="mt-8 space-y-4">
-                  {["About Us", "Our Approach", "Success Stories", "Careers", "Contact"].map(
-                    (l) => (
-                      <li key={l}>
-                        <a
-                          href="#"
-                          className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white"
-                        >
-                          {l}
-                          <span className="absolute bottom-0 left-0 h-px w-0 bg-[#0D7E92] transition-all duration-300 group-hover:w-full" />
-                        </a>
-                      </li>
-                    ),
-                  )}
+                  {[
+                    { label: "About Us", to: "#" },
+                    { label: "Our Approach", to: "#" },
+                    { label: "Success Stories", to: "#" },
+                    { label: "Careers", to: "/career" },
+                    { label: "Contact", to: "#contact" },
+                  ].map((l) => (
+                    <li key={l.label}>
+                      <Link
+                        to={l.to}
+                        className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white"
+                      >
+                        {l.label}
+                        <span className="absolute bottom-0 left-0 h-px w-0 bg-[#0D7E92] transition-all duration-300 group-hover:w-full" />
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div>
@@ -86,13 +91,13 @@ export function Footer() {
                     "Privacy Policy",
                   ].map((l) => (
                     <li key={l}>
-                      <a
-                        href="#"
+                      <Link
+                        to="#"
                         className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white"
                       >
                         {l}
                         <span className="absolute bottom-0 left-0 h-px w-0 bg-[#0D7E92] transition-all duration-300 group-hover:w-full" />
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
