@@ -32,16 +32,22 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Logo } from "../site/Logo";
 
 const formSchema = z.object({
-  fullName: z.string().min(2, "Full name is required"),
+  fullName: z
+    .string()
+    .min(2, "Full name is required")
+    .regex(/^[a-zA-Z\s]+$/, "Name can only contain alphabets"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Valid phone number is required"),
+  phone: z
+    .string()
+    .min(10, "Phone number must be at least 10 digits")
+    .regex(/^\d+$/, "Phone number must be numeric"),
   dob: z.string().min(1, "Date of birth is required"),
   address: z.string().min(5, "Address is required"),
   gender: z.enum(["male", "female", "other"]),
   position: z.string().min(1, "Please select a position"),
   location: z.string().min(1, "Please select a location"),
   qualification: z.string().min(1, "Please select your qualification"),
-  passoutYear: z.string().min(4, "Invalid year"),
+  passoutYear: z.string().min(4, "Invalid year").regex(/^\d+$/, "Year must be numeric"),
   experience: z.string().min(1, "Please select your experience"),
   otherQualification: z.string().optional(),
   coverLetter: z.string().optional(),

@@ -14,6 +14,7 @@ import {
   Facebook,
   Linkedin,
   ChevronDown,
+  AlertCircle,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -22,6 +23,14 @@ export const Route = createFileRoute("/contact")({
 });
 
 const SERVICES = ["Software Development", "Software Testing", "DevOps", "IT Staffing", "Other"];
+
+interface FormErrors {
+  name?: string;
+  company?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+}
 
 function ContactPage() {
   const [formState, setFormState] = useState({
@@ -33,8 +42,48 @@ function ContactPage() {
     message: "",
   });
 
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+
+  const validateField = (name: string, value: string) => {
+    let error = "";
+    switch (name) {
+      case "name":
+        if (!value) error = "Name is required";
+        else if (!/^[a-zA-Z\s]+$/.test(value)) error = "Name can only contain alphabets";
+        break;
+      case "email":
+        if (!value) error = "Email is required";
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = "Invalid email format";
+        break;
+      case "phone":
+        if (!value) error = "Phone number is required";
+        else if (!/^\d+$/.test(value)) error = "Phone number must be numeric";
+        else if (value.length < 10) error = "Phone number must be at least 10 digits";
+        break;
+      case "message":
+        if (!value) error = "Message is required";
+        else if (value.length < 10) error = "Message must be at least 10 characters";
+        break;
+    }
+    return error;
+  };
+
+  const handleBlur = (field: string) => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    const error = validateField(field, formState[field as keyof typeof formState]);
+    setErrors((prev) => ({ ...prev, [field]: error }));
+  };
+
+  const handleChange = (field: string, value: string) => {
+    setFormState((prev) => ({ ...prev, [field]: value }));
+    if (touched[field]) {
+      const error = validateField(field, value);
+      setErrors((prev) => ({ ...prev, [field]: error }));
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -48,8 +97,38 @@ function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formState);
+
+    // Validate all fields
+    const newErrors: FormErrors = {};
+    Object.keys(formState).forEach((key) => {
+      const field = key as keyof FormErrors;
+      const error = validateField(key, formState[key as keyof typeof formState]);
+      if (error) newErrors[field] = error;
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setTouched({
+        name: true,
+        email: true,
+        phone: true,
+        message: true,
+      });
+      return;
+    }
+
+    console.log("Form submitted successfully:", formState);
     alert("Thank you! We'll get back to you soon.");
+    setFormState({
+      name: "",
+      company: "",
+      email: "",
+      phone: "",
+      service: "Software Development",
+      message: "",
+    });
+    setErrors({});
+    setTouched({});
   };
 
   return (
@@ -175,6 +254,7 @@ function ContactPage() {
                     </span>
                   </div>
 
+                  {/* Social Boxes - TrueVex Branded Colors */}
                   <a
                     href="https://www.instagram.com/truevextech/"
                     target="_blank"
@@ -237,14 +317,38 @@ function ContactPage() {
                       <label className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground ml-1">
                         Your Name
                       </label>
-                      <input
-                        type="text"
-                        required
-                        className="w-full rounded-xl border-2 border-white/40 bg-white/5 px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:border-primary focus:bg-white/10"
-                        placeholder="John Doe"
-                        value={formState.name}
-                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          required
+                          className={`w-full rounded-xl border-2 bg-white/5 px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:bg-white/10 ${
+                            touched.name && errors.name
+                              ? "border-red-500/50 focus:border-red-500"
+                              : "border-white/40 focus:border-primary"
+                          }`}
+                          placeholder="John Doe"
+                          value={formState.name}
+                          onBlur={() => handleBlur("name")}
+                          onChange={(e) => handleChange("name", e.target.value)}
+                        />
+                        {touched.name && errors.name && (
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500">
+                            <AlertCircle size={18} />
+                          </div>
+                        )}
+                      </div>
+                      <AnimatePresence>
+                        {touched.name && errors.name && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1 mt-1"
+                          >
+                            {errors.name}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground ml-1">
@@ -255,7 +359,7 @@ function ContactPage() {
                         className="w-full rounded-xl border-2 border-white/40 bg-white/5 px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:border-primary focus:bg-white/10"
                         placeholder="Company Ltd."
                         value={formState.company}
-                        onChange={(e) => setFormState({ ...formState, company: e.target.value })}
+                        onChange={(e) => handleChange("company", e.target.value)}
                       />
                     </div>
                   </div>
@@ -265,26 +369,75 @@ function ContactPage() {
                       <label className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground ml-1">
                         Email Address
                       </label>
-                      <input
-                        type="email"
-                        required
-                        className="w-full rounded-xl border-2 border-white/40 bg-white/5 px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:border-primary focus:bg-white/10"
-                        placeholder="john@example.com"
-                        value={formState.email}
-                        onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      />
+                      <div className="relative">
+                        <input
+                          type="email"
+                          required
+                          className={`w-full rounded-xl border-2 bg-white/5 px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:bg-white/10 ${
+                            touched.email && errors.email
+                              ? "border-red-500/50 focus:border-red-500"
+                              : "border-white/40 focus:border-primary"
+                          }`}
+                          placeholder="john@example.com"
+                          value={formState.email}
+                          onBlur={() => handleBlur("email")}
+                          onChange={(e) => handleChange("email", e.target.value)}
+                        />
+                        {touched.email && errors.email && (
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500">
+                            <AlertCircle size={18} />
+                          </div>
+                        )}
+                      </div>
+                      <AnimatePresence>
+                        {touched.email && errors.email && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1 mt-1"
+                          >
+                            {errors.email}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground ml-1">
                         Phone Number
                       </label>
-                      <input
-                        type="tel"
-                        className="w-full rounded-xl border-2 border-white/40 bg-white/5 px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:border-primary focus:bg-white/10"
-                        placeholder="+91 00000 00000"
-                        value={formState.phone}
-                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                      />
+                      <div className="relative">
+                        <input
+                          type="tel"
+                          required
+                          className={`w-full rounded-xl border-2 bg-white/5 px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:bg-white/10 ${
+                            touched.phone && errors.phone
+                              ? "border-red-500/50 focus:border-red-500"
+                              : "border-white/40 focus:border-primary"
+                          }`}
+                          placeholder="+91 00000 00000"
+                          value={formState.phone}
+                          onBlur={() => handleBlur("phone")}
+                          onChange={(e) => handleChange("phone", e.target.value)}
+                        />
+                        {touched.phone && errors.phone && (
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500">
+                            <AlertCircle size={18} />
+                          </div>
+                        )}
+                      </div>
+                      <AnimatePresence>
+                        {touched.phone && errors.phone && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1 mt-1"
+                          >
+                            {errors.phone}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
 
@@ -325,7 +478,7 @@ function ContactPage() {
                                   key={service}
                                   type="button"
                                   onClick={() => {
-                                    setFormState({ ...formState, service });
+                                    handleChange("service", service);
                                     setIsSelectOpen(false);
                                   }}
                                   className={`flex w-full items-center px-6 py-3 text-sm transition-colors hover:bg-primary/20 hover:text-primary ${
@@ -348,14 +501,33 @@ function ContactPage() {
                     <label className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground ml-1">
                       Your Message
                     </label>
-                    <textarea
-                      required
-                      rows={4}
-                      className="w-full rounded-xl border-2 border-white/40 bg-white/5 px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:border-primary focus:bg-white/10 resize-none"
-                      placeholder="Tell us about your project..."
-                      value={formState.message}
-                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    />
+                    <div className="relative">
+                      <textarea
+                        required
+                        rows={4}
+                        className={`w-full rounded-xl border-2 bg-white/5 px-6 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:bg-white/10 resize-none ${
+                          touched.message && errors.message
+                            ? "border-red-500/50 focus:border-red-500"
+                            : "border-white/40 focus:border-primary"
+                        }`}
+                        placeholder="Tell us about your project..."
+                        value={formState.message}
+                        onBlur={() => handleBlur("message")}
+                        onChange={(e) => handleChange("message", e.target.value)}
+                      />
+                    </div>
+                    <AnimatePresence>
+                      {touched.message && errors.message && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1 mt-1"
+                        >
+                          {errors.message}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
 
                   <button
@@ -375,6 +547,31 @@ function ContactPage() {
               </motion.div>
             </div>
           </div>
+          {/* Map Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-20 overflow-hidden rounded-[2rem] border-2 border-white/40 bg-[#0A0A0A] shadow-2xl"
+          >
+            <div className="relative h-[400px] w-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1817.8340535931309!2d80.66324597229226!3d16.530031799999993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35e595dc0d10df%3A0xb2ecbc4622693537!2sPrashanti%20Bhavan!5e1!3m2!1sen!2sin!4v1776865483698!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{
+                  border: 0,
+                  filter: "invert(90%) hue-rotate(180deg) contrast(90%) brightness(90%)",
+                }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="grayscale-[0.5] transition-all duration-500 hover:grayscale-0"
+              />
+              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
+            </div>
+          </motion.div>
         </div>
       </main>
 
