@@ -168,6 +168,7 @@ export function Footer() {
               },
               {
                 label: "Instagram",
+                href: "https://www.instagram.com/truevextech/",
                 icon: (
                   <svg
                     width="16"
