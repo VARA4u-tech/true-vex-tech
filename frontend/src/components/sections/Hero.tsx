@@ -39,7 +39,7 @@ export function Hero() {
             Software Consultancy
           </motion.span>
 
-          <h1 className="font-display mt-8 text-balance text-6xl font-bold leading-[0.9] tracking-tighter md:text-8xl lg:text-[110px]">
+          <h1 className="font-display mt-8 text-balance text-4xl font-bold leading-[1.1] tracking-tighter sm:text-6xl md:text-8xl lg:text-[110px] md:leading-[0.9]">
             <VariableProximity
               label="Innovate. Develop. Accelerate. Your future."
               fromFontVariationSettings="'wght' 400, 'opsz' 9"
@@ -47,7 +47,7 @@ export function Hero() {
               containerRef={containerRef}
               radius={100}
               falloff="linear"
-              className="px-4"
+              className="px-2 md:px-4"
             />
           </h1>
 
@@ -56,7 +56,7 @@ export function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mx-auto mt-10 max-w-3xl text-balance text-xl text-muted-foreground md:text-2xl md:leading-relaxed"
+            className="mx-auto mt-8 max-w-3xl text-balance text-lg text-muted-foreground md:mt-10 md:text-2xl md:leading-relaxed"
           >
             Leading software consultancy committed to delivering cutting-edge solutions that drive
             business growth and operational excellence.
@@ -67,11 +67,11 @@ export function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.55 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-6"
+            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 md:mt-12"
           >
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-10 py-5 text-lg font-bold text-primary-foreground shadow-glow transition-transform hover:-translate-y-1 hover:bg-primary-glow"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-bold text-primary-foreground shadow-glow transition-transform hover:-translate-y-1 hover:bg-primary-glow sm:w-auto md:px-10 md:py-5 md:text-lg"
             >
               Get a Quote
               <svg
@@ -88,7 +88,7 @@ export function Hero() {
             </a>
             <a
               href="#services"
-              className="group inline-flex items-center gap-2 rounded-full border-[2.5px] border-white/30 bg-white/5 px-10 py-5 text-lg font-bold backdrop-blur-md transition-all hover:bg-white/10"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full border-[2.5px] border-white/30 bg-white/5 px-8 py-4 text-base font-bold backdrop-blur-md transition-all hover:bg-white/10 sm:w-auto md:px-10 md:py-5 md:text-lg"
             >
               Explore Services
             </a>
