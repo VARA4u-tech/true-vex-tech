@@ -17,7 +17,7 @@ const NAV = [
 ];
 
 const MORE = [
-  { label: "About Us", to: "/" },
+  { label: "About Us", to: "/", hash: "careers" },
   { label: "Contact", to: "/", hash: "contact" },
 ];
 
@@ -230,7 +230,7 @@ export function Header() {
                           {[
                             { label: "Services", to: "/services" },
                             { label: "Careers", to: "/", hash: "careers" },
-                            { label: "About Us", to: "/" },
+                            { label: "About Us", to: "/", hash: "careers" },
                             { label: "Contact", to: "/", hash: "contact" },
                           ].map((item, i) => (
                             <motion.div

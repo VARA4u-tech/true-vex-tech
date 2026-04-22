@@ -63,7 +63,7 @@ export function Footer() {
                 <h4 className="font-display text-xl font-bold text-[#0D7E92]">Company</h4>
                 <ul className="mt-8 space-y-4">
                   {[
-                    { label: "About Us", to: "/" },
+                    { label: "About Us", to: "/", hash: "careers" },
                     { label: "Our Approach", to: "/" },
                     { label: "Success Stories", to: "/" },
                     { label: "Careers", to: "/", hash: "careers" },
