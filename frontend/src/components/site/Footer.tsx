@@ -226,7 +226,7 @@ export function Footer() {
                 href={s.href || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full border border-white/10 bg-[#0A0A0A] px-4 py-4 md:px-8 md:py-5 transition-colors"
+                className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full border-2 border-white/40 bg-[#0A0A0A] px-4 py-4 md:px-8 md:py-5 transition-colors"
               >
                 <span className="absolute inset-0 z-0 translate-y-full bg-[#0D7E92] transition-transform duration-150 ease-in-out group-hover:translate-y-0" />
                 <span className="relative z-10 text-gray-400 transition-colors group-hover:text-black">

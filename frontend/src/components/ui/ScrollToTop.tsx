@@ -68,7 +68,7 @@ const ScrollToTop = () => {
           aria-label="Scroll to top"
         >
           {/* Main Button Circle */}
-          <div className="relative w-16 h-16 flex items-center justify-center rounded-full bg-slate-950/40 backdrop-blur-xl border border-white/10 shadow-[0_0_20px_rgba(13,126,146,0.2)] overflow-hidden">
+          <div className="relative w-16 h-16 flex items-center justify-center rounded-full bg-slate-950/40 backdrop-blur-xl border-2 border-white/40 shadow-[0_0_20px_rgba(13,126,146,0.2)] overflow-hidden">
             {/* Liquid Background Effect */}
             <motion.div
               animate={{

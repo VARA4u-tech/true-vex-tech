@@ -47,7 +47,7 @@ export function Header() {
       className={`fixed inset-x-0 top-3 z-50 transition-all duration-500 px-4 md:top-4 md:px-5`}
     >
       <div
-        className={`mx-auto flex h-14 md:h-20 max-w-7xl items-center justify-between px-4 transition-all duration-500 rounded-full border border-white/10 shadow-[0_0_30px_rgba(13,126,146,0.15)] ${
+        className={`mx-auto flex h-14 md:h-20 max-w-7xl items-center justify-between px-4 transition-all duration-500 rounded-full border-2 border-white/40 shadow-[0_0_30px_rgba(13,126,146,0.15)] ${
           scrolled ? "bg-background/70 backdrop-blur-xl" : "bg-background/40 backdrop-blur-md"
         }`}
       >
@@ -108,7 +108,7 @@ export function Header() {
                     transition={{ duration: 0.2, ease: "easeOut" }}
                     className="absolute left-1/2 top-full -translate-x-1/2 pt-2"
                   >
-                    <div className="w-48 overflow-hidden rounded-2xl border border-white/10 bg-background/90 p-2 shadow-[0_0_20px_rgba(13,126,146,0.1)] backdrop-blur-xl">
+                    <div className="w-48 overflow-hidden rounded-2xl border-2 border-white/40 bg-background/90 p-2 shadow-[0_0_20px_rgba(13,126,146,0.1)] backdrop-blur-xl">
                       {MORE.map((item) => (
                         <Link
                           key={item.label}
@@ -320,7 +320,7 @@ export function Header() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 + i * 0.05 }}
-                      className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-gray-400 transition-colors hover:bg-primary/20 hover:text-white"
+                      className="flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-white/40 bg-white/5 text-gray-400 transition-colors hover:bg-primary/20 hover:text-white"
                     >
                       <span className="sr-only">{s.label}</span>
                       {s.label === "LinkedIn" && (
