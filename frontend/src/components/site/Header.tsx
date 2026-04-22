@@ -39,7 +39,7 @@ export function Header() {
       className={`fixed inset-x-0 top-3 z-50 transition-all duration-500 px-4 md:top-4 md:px-5`}
     >
       <div
-        className={`mx-auto flex h-14 md:h-20 max-w-7xl items-center justify-between px-4 transition-all duration-500 rounded-full border-[6px] md:border-[8px] border-white/65 shadow-lg shadow-black/5 ${
+        className={`mx-auto flex h-14 md:h-20 max-w-7xl items-center justify-between px-4 transition-all duration-500 rounded-full border border-white/10 shadow-[0_0_30px_rgba(13,126,146,0.15)] ${
           scrolled ? "bg-background/70 backdrop-blur-xl" : "bg-background/40 backdrop-blur-md"
         }`}
       >
@@ -96,7 +96,7 @@ export function Header() {
                     transition={{ duration: 0.2, ease: "easeOut" }}
                     className="absolute left-1/2 top-full -translate-x-1/2 pt-2"
                   >
-                    <div className="w-48 overflow-hidden rounded-2xl border-[4px] border-white/60 bg-background/90 p-2 shadow-2xl backdrop-blur-xl">
+                    <div className="w-48 overflow-hidden rounded-2xl border border-white/10 bg-background/90 p-2 shadow-[0_0_20px_rgba(13,126,146,0.1)] backdrop-blur-xl">
                       {MORE.map((item) => (
                         <Link
                           key={item.label}
