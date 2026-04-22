@@ -82,7 +82,7 @@ function ServicesPage() {
               ease="back.inOut(2)"
               stagger={0.04}
               containerClassName="mt-4"
-              textClassName="font-display text-5xl font-bold md:text-7xl"
+              textClassName="font-display text-3xl sm:text-4xl md:text-7xl leading-tight"
             >
               Comprehensive Services
             </ScrollFloat>
@@ -97,7 +97,7 @@ function ServicesPage() {
             </motion.p>
           </div>
 
-          <div className="mt-24 space-y-32">
+          <div className="mt-16 md:mt-24 space-y-16 md:space-y-32">
             {SERVICES.map((s, i) => (
               <section
                 key={s.title}
@@ -109,8 +109,8 @@ function ServicesPage() {
                   viewport={{ once: true }}
                   className="flex-1"
                 >
-                  <div className="relative aspect-video overflow-hidden rounded-3xl border border-border shadow-2xl">
-                    <img src={s.image} alt={s.title} className="h-full w-full object-cover" />
+                  <div className="relative overflow-hidden rounded-3xl border-2 border-white/40 shadow-2xl bg-black/20">
+                    <img src={s.image} alt={s.title} className="h-full w-full object-contain" />
                   </div>
                 </motion.div>
                 <motion.div
@@ -119,7 +119,9 @@ function ServicesPage() {
                   viewport={{ once: true }}
                   className="flex-1 py-4"
                 >
-                  <h2 className="font-display text-4xl font-bold md:text-5xl">{s.title}</h2>
+                  <h2 className="font-display text-2xl sm:text-3xl font-bold md:text-5xl">
+                    {s.title}
+                  </h2>
                   <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
                     {s.description}
                   </p>

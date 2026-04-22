@@ -72,9 +72,10 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
           scrollTrigger: {
             trigger: el,
             scroller,
-            start: scrollStart,
-            end: scrollEnd,
-            scrub: true,
+            start: "top 80%",
+            end: "bottom 20%",
+            scrub: false,
+            toggleActions: "play none none reverse",
           },
         },
       );
