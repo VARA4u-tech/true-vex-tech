@@ -150,17 +150,19 @@ function SplashCursor({
       }
       gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
-      const halfFloatTexType = isWebGL2
-        ? gl.HALF_FLOAT
-        : halfFloat && (halfFloat as any).HALF_FLOAT_OES;
+      const halfFloatTexType =
+        (isWebGL2
+          ? (gl as WebGL2RenderingContext).HALF_FLOAT
+          : (halfFloat as { HALF_FLOAT_OES: number })?.HALF_FLOAT_OES) || gl.UNSIGNED_BYTE;
       let formatRGBA: { internalFormat: number; format: number };
       let formatRG: { internalFormat: number; format: number };
       let formatR: { internalFormat: number; format: number };
 
       if (isWebGL2) {
-        formatRGBA = getSupportedFormat(gl, gl.RGBA16F, gl.RGBA, halfFloatTexType);
-        formatRG = getSupportedFormat(gl, (gl as any).RG16F, (gl as any).RG, halfFloatTexType);
-        formatR = getSupportedFormat(gl, (gl as any).R16F, (gl as any).RED, halfFloatTexType);
+        const gl2 = gl as WebGL2RenderingContext;
+        formatRGBA = getSupportedFormat(gl2, gl2.RGBA16F, gl2.RGBA, halfFloatTexType);
+        formatRG = getSupportedFormat(gl2, gl2.RG16F, gl2.RG, halfFloatTexType);
+        formatR = getSupportedFormat(gl2, gl2.R16F, gl2.RED, halfFloatTexType);
       } else {
         formatRGBA = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
         formatRG = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
@@ -180,17 +182,18 @@ function SplashCursor({
     }
 
     function getSupportedFormat(
-      gl: WebGLRenderingContext,
+      gl: WebGLRenderingContext | WebGL2RenderingContext,
       internalFormat: number,
       format: number,
       type: number,
     ): { internalFormat: number; format: number } {
       if (!supportRenderTextureFormat(gl, internalFormat, format, type)) {
+        const gl2 = gl as WebGL2RenderingContext;
         switch (internalFormat) {
-          case (gl as any).R16F:
-            return getSupportedFormat(gl, (gl as any).RG16F, (gl as any).RG, type);
-          case (gl as any).RG16F:
-            return getSupportedFormat(gl, (gl as any).RGBA16F, gl.RGBA, type);
+          case gl2.R16F:
+            return getSupportedFormat(gl, gl2.RG16F, gl2.RG, type);
+          case gl2.RG16F:
+            return getSupportedFormat(gl, gl2.RGBA16F, gl2.RGBA, type);
           default:
             return { internalFormat: gl.RGBA, format: gl.RGBA };
         }
@@ -199,7 +202,7 @@ function SplashCursor({
     }
 
     function supportRenderTextureFormat(
-      gl: WebGLRenderingContext,
+      gl: WebGLRenderingContext | WebGL2RenderingContext,
       internalFormat: number,
       format: number,
       type: number,
@@ -1228,7 +1231,7 @@ function SplashCursor({
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove as any as EventListener);
+      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [

@@ -94,7 +94,7 @@ export function Footer() {
                   ].map((l) => (
                     <li key={l}>
                       <Link
-                        to="/"
+                        to={l === "Privacy Policy" ? "/privacy" : "/"}
                         className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white"
                       >
                         {l}
@@ -247,9 +247,13 @@ export function Footer() {
           </p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 md:gap-8">
             {["Terms of Service", "Privacy Policy", "Cookie Policy"].map((l) => (
-              <a key={l} href="#" className="hover:text-white transition-colors whitespace-nowrap">
+              <Link
+                key={l}
+                to={l === "Terms of Service" ? "/terms" : l === "Privacy Policy" ? "/privacy" : "/"}
+                className="hover:text-white transition-colors whitespace-nowrap"
+              >
                 {l}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
