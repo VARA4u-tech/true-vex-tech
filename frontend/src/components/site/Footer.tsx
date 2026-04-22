@@ -136,9 +136,9 @@ export function Footer() {
               alt="TrueVex Logo"
               className="h-16 w-auto md:h-24 lg:h-32 object-contain brightness-0 invert"
             />
-            <h2 className="font-display font-bold leading-none tracking-tighter text-white flex flex-col md:flex-row items-center md:items-end">
-              <span className="text-[15vw] md:text-[10vw] lg:text-[100px]">TrueVex</span>
-              <span className="md:ml-2 text-[6vw] md:text-[4vw] lg:text-[40px] text-[#0D7E92]">
+            <h2 className="font-display font-bold leading-none tracking-tighter text-white flex flex-col md:flex-row items-center md:items-end text-center md:text-left">
+              <span className="text-[12vw] md:text-[8vw] lg:text-[100px]">TrueVex</span>
+              <span className="md:ml-2 text-[5vw] md:text-[3.5vw] lg:text-[40px] text-[#0D7E92]">
                 Technologies
               </span>
             </h2>
@@ -203,6 +203,7 @@ export function Footer() {
               },
               {
                 label: "Facebook",
+                href: "https://www.facebook.com/people/Truevex-Technologies/61585918391755/",
                 icon: (
                   <svg
                     width="16"
@@ -221,7 +222,9 @@ export function Footer() {
             ].map((s) => (
               <a
                 key={s.label}
-                href="#"
+                href={s.href || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full border border-white/10 bg-[#0A0A0A] px-4 py-4 md:px-8 md:py-5 transition-colors"
               >
                 <span className="absolute inset-0 z-0 translate-y-full bg-[#0D7E92] transition-transform duration-150 ease-in-out group-hover:translate-y-0" />
@@ -237,11 +240,13 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-10 text-[10px] uppercase tracking-[0.2em] text-gray-500 md:flex-row">
-          <p>© {new Date().getFullYear()} TrueVex Technologies. All rights reserved.</p>
-          <div className="flex gap-8">
+        <div className="mt-20 flex flex-col items-center justify-between gap-8 border-t border-white/5 pt-10 text-[10px] uppercase tracking-[0.15em] text-gray-500 md:flex-row md:tracking-[0.2em]">
+          <p className="text-center md:text-left">
+            © {new Date().getFullYear()} TrueVex Technologies. All rights reserved.
+          </p>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 md:gap-8">
             {["Terms of Service", "Privacy Policy", "Cookie Policy"].map((l) => (
-              <a key={l} href="#" className="hover:text-white transition-colors">
+              <a key={l} href="#" className="hover:text-white transition-colors whitespace-nowrap">
                 {l}
               </a>
             ))}
