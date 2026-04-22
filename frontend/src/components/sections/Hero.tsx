@@ -105,8 +105,8 @@ export function Hero() {
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className={`bg-card px-8 py-12 text-center transition-colors hover:bg-white/[0.03] ${
-                i < STATS.length - 1 ? "md:border-r border-white/10" : ""
-              } ${i > 0 ? "border-t md:border-t-0 border-white/10" : ""}`}
+                i < STATS.length - 1 ? "md:border-r border-white/40" : ""
+              } ${i > 0 ? "border-t md:border-t-0 border-white/40" : ""}`}
             >
               <div className="font-display text-5xl font-bold tracking-tight text-gradient md:text-6xl">
                 {s.value}

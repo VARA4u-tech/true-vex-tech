@@ -241,7 +241,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-20 flex flex-col items-center justify-between gap-8 border-t border-white/5 pt-10 text-[10px] uppercase tracking-[0.15em] text-gray-500 md:flex-row md:tracking-[0.2em]">
+        <div className="mt-20 flex flex-col items-center justify-between gap-8 border-t border-white/40 pt-10 text-[10px] uppercase tracking-[0.15em] text-gray-500 md:flex-row md:tracking-[0.2em]">
           <p className="text-center md:text-left">
             © {new Date().getFullYear()} TrueVex Technologies. All rights reserved.
           </p>

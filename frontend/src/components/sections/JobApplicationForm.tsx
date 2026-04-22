@@ -105,7 +105,7 @@ export function JobApplicationForm({
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
               {/* Personal Information */}
               <section className="space-y-6">
-                <h3 className="text-lg font-bold border-b border-white/10 pb-2 text-primary">
+                <h3 className="text-lg font-bold border-b border-white/40 pb-2 text-primary">
                   Personal Information
                 </h3>
                 <div className="grid gap-6 md:grid-cols-2">
@@ -121,7 +121,7 @@ export function JobApplicationForm({
                           <Input
                             placeholder="Enter your full name"
                             {...field}
-                            className="bg-white/5 border-white/10 focus:bg-white/10 text-white transition-all"
+                            className="bg-white/5 border-white/40 focus:bg-white/10 text-white transition-all"
                           />
                         </FormControl>
                         <FormMessage />
@@ -242,7 +242,7 @@ export function JobApplicationForm({
 
               {/* Job Details */}
               <section className="space-y-6">
-                <h3 className="text-lg font-bold border-b border-white/10 pb-2 text-primary">
+                <h3 className="text-lg font-bold border-b border-white/40 pb-2 text-primary">
                   Job Details
                 </h3>
                 <div className="grid gap-6 md:grid-cols-2">
@@ -305,7 +305,7 @@ export function JobApplicationForm({
 
               {/* Educational Details */}
               <section className="space-y-6">
-                <h3 className="text-lg font-bold border-b border-white/10 pb-2 text-primary">
+                <h3 className="text-lg font-bold border-b border-white/40 pb-2 text-primary">
                   Educational Details
                 </h3>
                 <div className="grid gap-6 md:grid-cols-2">
@@ -390,7 +390,7 @@ export function JobApplicationForm({
 
               {/* Work Experience */}
               <section className="space-y-6">
-                <h3 className="text-lg font-bold border-b border-white/10 pb-2 text-primary">
+                <h3 className="text-lg font-bold border-b border-white/40 pb-2 text-primary">
                   Work Experience
                 </h3>
                 <FormField

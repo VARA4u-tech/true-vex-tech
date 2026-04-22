@@ -221,7 +221,7 @@ export function Products({ variant = "full" }: ProductsProps) {
                         to="/services"
                         className="group flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-white/50 transition-colors hover:text-primary"
                       >
-                        <span className="h-px w-12 bg-white/20 transition-all group-hover:w-20 group-hover:bg-primary" />
+                        <span className="h-px w-12 bg-white/40 transition-all group-hover:w-20 group-hover:bg-primary" />
                         Explore Service Catalog
                         <svg
                           width="18"
