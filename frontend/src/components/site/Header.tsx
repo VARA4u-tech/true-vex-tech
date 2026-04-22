@@ -111,22 +111,22 @@ export function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 md:gap-3">
           <a
             href="#contact"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5 hover:bg-primary-glow"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5 hover:bg-primary-glow md:px-5 md:py-2.5 md:text-sm"
           >
             Get Started
           </a>
           <button
             onClick={() => setOpen((o) => !o)}
             aria-label="Menu"
-            className="ml-1 inline-flex h-10 w-10 items-center justify-center rounded-full border border-border lg:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 lg:hidden md:h-10 md:w-10"
           >
             <span className="sr-only">Menu</span>
-            <div className="space-y-1.5">
-              <span className="block h-px w-5 bg-foreground" />
-              <span className="block h-px w-5 bg-foreground" />
+            <div className="space-y-1">
+              <span className="block h-px w-4 bg-foreground" />
+              <span className="block h-px w-4 bg-foreground" />
             </div>
           </button>
         </div>
