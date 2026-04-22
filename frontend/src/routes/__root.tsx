@@ -30,11 +30,13 @@ export const Route = createRootRoute({
 });
 
 import SplashCursor from "@/components/ui/SplashCursor";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 function RootComponent() {
   return (
     <>
       <SplashCursor />
+      <ScrollToTop />
       <Outlet />
     </>
   );
