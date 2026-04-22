@@ -1,7 +1,17 @@
+import { Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 
-const PRODUCTS = [
+interface Product {
+  tag: string;
+  title: string;
+  description: string;
+  href: string;
+  image: string;
+  features: string[];
+}
+
+const PRODUCTS: Product[] = [
   {
     tag: "Development",
     title: "Software Development",
@@ -54,8 +64,7 @@ export function Products({ variant = "full" }: ProductsProps) {
     offset: ["start start", "end end"],
   });
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // We have 4 sections, so we divide the 0-1 range by 4
+  useMotionValueEvent(scrollYProgress, "change", (latest: number) => {
     const sectionIndex = Math.min(Math.floor(latest * PRODUCTS.length), PRODUCTS.length - 1);
     if (sectionIndex !== activeIndex) {
       setActiveIndex(sectionIndex);
@@ -128,6 +137,27 @@ export function Products({ variant = "full" }: ProductsProps) {
               </motion.article>
             ))}
           </div>
+
+          <div className="mt-20 flex justify-center">
+            <Link
+              to="/services"
+              className="group relative flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-bold tracking-widest uppercase text-white transition-all hover:bg-white/10 hover:border-primary/50"
+            >
+              View Service Catalog
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                className="transition-transform group-hover:translate-x-2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
     );
@@ -184,6 +214,27 @@ export function Products({ variant = "full" }: ProductsProps) {
                           {f}
                         </span>
                       ))}
+                    </div>
+
+                    <div className="mt-16">
+                      <Link
+                        to="/services"
+                        className="group flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-white/50 transition-colors hover:text-primary"
+                      >
+                        <span className="h-px w-12 bg-white/20 transition-all group-hover:w-20 group-hover:bg-primary" />
+                        Explore Service Catalog
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          className="transition-transform group-hover:translate-x-1"
+                        >
+                          <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                      </Link>
                     </div>
                   </motion.div>
                 </AnimatePresence>

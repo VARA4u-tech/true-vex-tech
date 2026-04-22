@@ -17,8 +17,8 @@ const NAV = [
 ];
 
 const MORE = [
-  { label: "About Us", to: "#" },
-  { label: "Contact", to: "#contact" },
+  { label: "About Us", to: "/" },
+  { label: "Contact", to: "/", hash: "contact" },
 ];
 
 export function Header() {
@@ -53,6 +53,7 @@ export function Header() {
               <Link
                 key={item.label}
                 to={item.to}
+                hash={"hash" in item ? (item.hash as string) : undefined}
                 activeProps={{ className: "text-primary font-semibold" }}
                 inactiveProps={{ className: "text-muted-foreground hover:text-primary" }}
                 className="px-4 py-2 text-sm font-medium transition-colors"
@@ -100,6 +101,7 @@ export function Header() {
                         <Link
                           key={item.label}
                           to={item.to}
+                          hash={"hash" in item ? (item.hash as string) : undefined}
                           onClick={() => setDropdownOpen(false)}
                           className="flex cursor-pointer items-center rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary outline-none"
                         >
@@ -228,8 +230,8 @@ export function Header() {
                           {[
                             { label: "Services", to: "/services" },
                             { label: "Careers", to: "/", hash: "careers" },
-                            { label: "About Us", to: "#" },
-                            { label: "Contact", to: "#contact" },
+                            { label: "About Us", to: "/" },
+                            { label: "Contact", to: "/", hash: "contact" },
                           ].map((item, i) => (
                             <motion.div
                               key={item.label}
