@@ -127,8 +127,39 @@ export function Careers() {
     {
       title: "HR Associate",
       location: "Vijayawada (On-site)",
-      type: "Full-time · Entry-level",
+      type: "Full-time · Junior",
       description: "Finding Talent",
+      details: {
+        overview: "Detailed overview of the role and application process.",
+        tags: ["Vijayawada, India", "In-Office", "Junior", "Full-time"],
+        jobDescription:
+          "We are seeking a motivated and detail-oriented HR Associate to join our Human Resources team. In this role, you will assist in managing the full employee lifecycle, from recruitment to offboarding, while ensuring compliance with labor laws and company policies. The ideal candidate thrives in a fast-paced, collaborative environment and is eager to grow in the HR domain.",
+        responsibilities: [
+          "Handle end-to-end recruitment including sourcing, screening, scheduling interviews, and offer coordination.",
+          "Maintain employee records and HR documentation.",
+          "Conduct employee engagement surveys and manage HR events.",
+          "Prepare HR reports and maintain HR tracking activities.",
+        ],
+        requirements: [
+          "Degree in Human Resources, Business Administration, or related field.",
+          "Experience in recruitment and personnel management.",
+          "Strong organizational skills and time management.",
+          "Excellent communication skills.",
+          "Knowledge of compliance and legal requirements.",
+          "Ability to maintain confidentiality and professionalism.",
+        ],
+        benefits: [
+          "Competitive salary and performance bonuses.",
+          "Comprehensive health, dental, and vision insurance.",
+          "Generous paid time off and flexible working hours.",
+          "401(k) retirement plan with company match.",
+          "Professional development opportunities and conference attendance.",
+          "Stock options and equity grants.",
+          "Paid parental leave.",
+          "Dynamic and inclusive company culture.",
+          "Modern office space with amenities.",
+        ],
+      },
     },
   ];
 
