@@ -34,9 +34,11 @@ export function Header() {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 md:top-4 md:px-5`}>
+    <header
+      className={`fixed inset-x-0 top-3 z-50 transition-all duration-500 px-4 md:top-4 md:px-5`}
+    >
       <div
-        className={`mx-auto flex h-16 md:h-20 max-w-7xl items-center justify-between px-5 transition-all duration-500 md:rounded-full border-[2px] md:border-[2.5px] border-white/30 shadow-lg shadow-black/5 ${
+        className={`mx-auto flex h-14 md:h-20 max-w-7xl items-center justify-between px-4 transition-all duration-500 rounded-full border-[2px] md:border-[2.5px] border-white/30 shadow-lg shadow-black/5 ${
           scrolled ? "bg-background/70 backdrop-blur-xl" : "bg-background/40 backdrop-blur-md"
         }`}
       >
