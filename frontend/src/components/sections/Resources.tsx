@@ -76,7 +76,7 @@ export function Resources() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="group relative flex flex-col rounded-3xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow"
+              className="brutalist-card group relative flex flex-col p-8 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow"
             >
               <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/15 text-primary">
                 {r.icon}

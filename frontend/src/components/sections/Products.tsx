@@ -115,7 +115,7 @@ export function Products({ variant = "full" }: ProductsProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative flex flex-col border border-white/10 bg-white/[0.02] p-8 transition-colors hover:border-primary/50"
+                className="brutalist-card group relative flex flex-col p-8 transition-colors hover:border-primary/50"
               >
                 <div className="mb-6 h-1 w-10 bg-primary/30 transition-all group-hover:w-full group-hover:bg-primary" />
                 <span className="text-[10px] font-bold uppercase tracking-widest text-primary/60">
@@ -264,7 +264,7 @@ export function Products({ variant = "full" }: ProductsProps) {
             {/* Right Side: Immersive Image Gallery */}
             <div className="hidden lg:flex lg:col-span-6 items-center justify-center">
               <div className="relative h-[600px] w-full max-w-[600px]">
-                <div className="relative h-full w-full overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#050505] shadow-2xl">
+                <div className="brutalist-card relative h-full w-full overflow-hidden shadow-2xl">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeIndex}

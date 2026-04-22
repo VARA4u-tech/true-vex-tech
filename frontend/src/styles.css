@@ -111,13 +111,13 @@
 
 @layer utilities {
   .brutalist-card {
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 6px solid rgba(255, 255, 255, 0.65);
     border-radius: 2rem;
     background-color: var(--card);
   }
   @media (min-width: 768px) {
     .brutalist-card {
-      border-width: 2.5px;
+      border-width: 8px;
       border-radius: 2.5rem;
     }
   }

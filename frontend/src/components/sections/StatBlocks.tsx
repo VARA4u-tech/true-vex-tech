@@ -45,7 +45,7 @@ function AnimatedBigText({ text }: { text: string }) {
 export function StatBlocks() {
   return (
     <section className="relative bg-card py-28 md:py-36">
-      <div className="mx-auto max-w-7xl space-y-px overflow-hidden rounded-3xl border border-border bg-border md:px-8">
+      <div className="brutalist-card mx-auto max-w-7xl space-y-px overflow-hidden md:mx-8">
         {STATS.map((s, i) => (
           <motion.div
             key={s.title}

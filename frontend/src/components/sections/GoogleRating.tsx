@@ -48,7 +48,7 @@ export function GoogleRating() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden rounded-3xl border border-border bg-card p-10 md:p-14"
+            className="brutalist-card relative overflow-hidden p-10 md:p-14"
           >
             <div
               aria-hidden
