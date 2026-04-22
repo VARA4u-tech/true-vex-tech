@@ -77,6 +77,9 @@ function SplashCursor({
   const animationFrameId = useRef<number | null>(null);
 
   useEffect(() => {
+    // Disable on mobile to prevent performance issues
+    if (window.innerWidth < 768) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
