@@ -155,7 +155,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       const scale = 1 - scaleProgress * (1 - targetScale);
       const rotation = rotationAmount ? i * rotationAmount * scaleProgress : 0;
 
-      // Blur is expensive on mobile, skip it
+      // Blur is very expensive on mobile, disable it completely
       let blur = 0;
       if (blurAmount && !isMobile) {
         if (i < topCardIndex) {
@@ -174,7 +174,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       }
 
       let brightness = 1;
-      // Skip brightness calculation if on mobile for extra FPS
+      // Skip brightness on mobile to save GPU cycles
       if (!isMobile) {
         if (i < topCardIndex) {
           const depthInStack = topCardIndex - i;
@@ -281,14 +281,14 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       const lenis = new Lenis({
         wrapper: scroller,
         content: scroller.querySelector(".scroll-stack-inner") as HTMLElement,
-        duration: isMobile ? 0.8 : 1.2, // Faster duration on mobile
+        duration: isMobile ? 1.5 : 1.2,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        touchMultiplier: 1.5,
+        touchMultiplier: 2,
         infinite: false,
         gestureOrientation: "vertical",
-        lerp: isMobile ? 0.15 : 0.1, // Higher lerp on mobile for responsiveness
-        syncTouch: false, // Disable syncTouch for native feel on mobile
+        lerp: isMobile ? 0.08 : 0.1,
+        syncTouch: true,
       });
 
       lenis.on("scroll", updateCardTransforms);
