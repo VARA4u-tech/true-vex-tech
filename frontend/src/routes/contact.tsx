@@ -562,12 +562,11 @@ function ContactPage() {
                 height="100%"
                 style={{
                   border: 0,
-                  filter: "invert(90%) hue-rotate(180deg) contrast(90%) brightness(90%)",
                 }}
                 allowFullScreen={true}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale-[0.5] transition-all duration-500 hover:grayscale-0"
+                className="transition-all duration-500"
               />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
             </div>
