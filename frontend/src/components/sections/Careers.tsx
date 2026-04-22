@@ -49,8 +49,37 @@ export function Careers() {
     {
       title: "QA Automation Engineer",
       location: "Vijayawada (On-site)",
-      type: "Full-time · Mid-level",
+      type: "Full-time · Senior",
       description: "Design and implement automated tests for web and mobile applications.",
+      details: {
+        overview: "Detailed overview of the role and application process.",
+        tags: ["Vijayawada, India", "On-Site", "Senior", "Full-time"],
+        jobDescription:
+          "We are seeking a skilled and detail-oriented QA Automation Engineer to join our growing engineering team. In this role, you will ensure the quality, performance, and reliability of our software products through automated testing frameworks. You will collaborate with developers, product managers, and UX designers throughout the development lifecycle to deliver high-quality software.",
+        responsibilities: [
+          "Design, develop, and maintain automated test frameworks for web and backend applications.",
+          "Create and execute cross-functional test scripts to understand requirements and API integration testing.",
+          "Analyze test results and CI/CD pipeline failures to resolve issues.",
+          "Participate in Agile ceremonies such as sprint planning, reviews, and retrospectives.",
+        ],
+        requirements: [
+          "Experience in QA automation and test planning.",
+          "Proficiency with automation frameworks like Selenium, Cypress, Playwright.",
+          "Experience with CI/CD tools like Jenkins, GitHub Actions.",
+          "Strong programming skills in Java, Python, or JavaScript.",
+        ],
+        benefits: [
+          "Competitive salary and performance bonuses.",
+          "Comprehensive health, dental, and vision insurance.",
+          "Generous paid time off and flexible working hours.",
+          "401(k) retirement plan with company match.",
+          "Professional development opportunities and conference attendance.",
+          "Stock options and equity grants.",
+          "Paid parental leave.",
+          "Dynamic and inclusive company culture.",
+          "Modern office space with amenities.",
+        ],
+      },
     },
     {
       title: "DevOps Engineer",
