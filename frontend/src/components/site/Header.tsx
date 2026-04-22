@@ -147,7 +147,10 @@ export function Header() {
             <div className="flex h-20 items-center justify-between px-8">
               <Logo />
               <button
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  setCompanyOpen(false);
+                }}
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white"
               >
                 <svg
@@ -169,36 +172,87 @@ export function Header() {
             {/* Mobile Menu Content */}
             <div className="flex flex-1 flex-col justify-between px-8 py-12">
               <nav className="flex flex-col gap-6">
-                {[...NAV, ...MORE].map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.05 }}
+                {/* Home Link */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <Link
+                    to="/"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-between text-4xl font-bold tracking-tight text-white transition-colors hover:text-primary"
                   >
-                    <Link
-                      to={"to" in item ? item.to : "#"}
-                      onClick={() => setOpen(false)}
-                      className="flex items-center justify-between text-4xl font-bold tracking-tight text-white transition-colors hover:text-primary"
+                    Home
+                  </Link>
+                </motion.div>
+
+                {/* Company Accordion */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  <button
+                    onClick={() => setCompanyOpen(!companyOpen)}
+                    className="flex w-full items-center justify-between text-4xl font-bold tracking-tight text-white transition-colors hover:text-primary"
+                  >
+                    Company
+                    <motion.svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      animate={{ rotate: companyOpen ? 45 : 0 }}
+                      className="text-primary"
                     >
-                      {item.label}
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-primary/50"
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </motion.svg>
+                  </button>
+
+                  <AnimatePresence>
+                    {companyOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
                       >
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                      </svg>
-                    </Link>
-                  </motion.div>
-                ))}
+                        <div className="flex flex-col gap-4 py-6 pl-4 border-l-2 border-primary/20 mt-2">
+                          {[
+                            { label: "Services", to: "/services" },
+                            { label: "Careers", to: "/career" },
+                            { label: "About Us", to: "#" },
+                            { label: "Contact", to: "#contact" },
+                          ].map((item, i) => (
+                            <motion.div
+                              key={item.label}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: i * 0.05 }}
+                            >
+                              <Link
+                                to={item.to}
+                                onClick={() => {
+                                  setOpen(false);
+                                  setCompanyOpen(false);
+                                }}
+                                className="text-2xl font-bold text-gray-400 hover:text-white transition-colors"
+                              >
+                                {item.label}
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               </nav>
 
               <div className="flex flex-col gap-8">
