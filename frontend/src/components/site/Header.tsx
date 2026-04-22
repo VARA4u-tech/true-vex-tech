@@ -134,24 +134,121 @@ export function Header() {
         </div>
       </div>
 
-      {open && (
-        <div className="border-t border-border bg-background lg:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col px-5 py-4">
-            {NAV.map((item) => (
-              <Link
-                key={item.label}
-                to={item.to}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-[60] flex flex-col bg-background/95 backdrop-blur-2xl lg:hidden"
+          >
+            {/* Mobile Header Top Bar */}
+            <div className="flex h-20 items-center justify-between px-8">
+              <Logo />
+              <button
                 onClick={() => setOpen(false)}
-                activeProps={{ className: "bg-muted text-foreground" }}
-                inactiveProps={{ className: "text-foreground hover:bg-muted" }}
-                className="rounded-lg px-3 py-3 text-base font-medium transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white"
               >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Mobile Menu Content */}
+            <div className="flex flex-1 flex-col justify-between px-8 py-12">
+              <nav className="flex flex-col gap-6">
+                {[...NAV, ...MORE].map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.05 }}
+                  >
+                    <Link
+                      to={"to" in item ? item.to : "#"}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center justify-between text-4xl font-bold tracking-tight text-white transition-colors hover:text-primary"
+                    >
+                      {item.label}
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-primary/50"
+                      >
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+
+              <div className="flex flex-col gap-8">
+                <a
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  className="flex h-16 w-full items-center justify-center rounded-2xl bg-primary text-lg font-bold text-white shadow-glow"
+                >
+                  Get Started
+                </a>
+
+                {/* Social Icons Row */}
+                <div className="flex justify-between gap-4">
+                  {[
+                    { label: "LinkedIn", href: "https://www.linkedin.com/company/truevex-technologies-pvt-ltd/" },
+                    { label: "Instagram", href: "https://www.instagram.com/truevextech/" },
+                    { label: "Twitter", href: "https://x.com/truevextech" },
+                    { label: "Facebook", href: "https://www.facebook.com/people/Truevex-Technologies/61585918391755/" },
+                  ].map((s, i) => (
+                    <motion.a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 + i * 0.05 }}
+                      className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-gray-400 transition-colors hover:bg-primary/20 hover:text-white"
+                    >
+                      <span className="sr-only">{s.label}</span>
+                      {s.label === "LinkedIn" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                      )}
+                      {s.label === "Instagram" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                      )}
+                      {s.label === "Twitter" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                      )}
+                      {s.label === "Facebook" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                      )}
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
