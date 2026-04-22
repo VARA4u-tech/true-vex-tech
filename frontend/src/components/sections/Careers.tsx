@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -7,8 +8,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { JobApplicationForm } from "./JobApplicationForm";
 
 export function Careers() {
+  const [formOpen, setFormOpen] = useState(false);
+  const [selectedPosition, setSelectedPosition] = useState("");
+
+  const handleApply = (position: string) => {
+    setSelectedPosition(position);
+    setFormOpen(true);
+  };
+
   const jobs = [
     {
       title: "Senior Full Stack Engineer",
@@ -298,7 +308,12 @@ export function Careers() {
                                     </li>
                                   ))}
                                 </ul>
-                                <button className="w-full mt-10 rounded-xl bg-primary py-4 text-sm font-bold text-white shadow-glow transition-all hover:-translate-y-0.5 hover:bg-primary-glow">
+                                <button
+                                  onClick={() => {
+                                    handleApply(job.title);
+                                  }}
+                                  className="w-full mt-10 rounded-xl bg-primary py-4 text-sm font-bold text-white shadow-glow transition-all hover:-translate-y-0.5 hover:bg-primary-glow"
+                                >
                                   Apply Now
                                 </button>
                               </div>
@@ -308,7 +323,10 @@ export function Careers() {
                       </DialogContent>
                     </Dialog>
                   )}
-                  <button className="rounded-full bg-white px-6 py-2 text-sm font-bold text-black transition-transform hover:scale-105 active:scale-95">
+                  <button
+                    onClick={() => handleApply(job.title)}
+                    className="rounded-full bg-white px-6 py-2 text-sm font-bold text-black transition-transform hover:scale-105 active:scale-95"
+                  >
                     Apply
                   </button>
                 </div>
@@ -317,6 +335,12 @@ export function Careers() {
             </motion.div>
           ))}
         </div>
+
+        <JobApplicationForm
+          isOpen={formOpen}
+          onOpenChange={setFormOpen}
+          defaultPosition={selectedPosition}
+        />
 
         {/* Culture & Perks */}
         <div className="mt-32 grid gap-12 lg:grid-cols-2">
