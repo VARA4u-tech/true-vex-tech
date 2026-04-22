@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-type AppRoute = "/" | "/services" | "/career";
+type AppRoute = "/" | "/services" | "/career" | "/contact";
 
 interface NavItem {
   label: string;
@@ -26,7 +26,7 @@ const NAV: NavItem[] = [
 
 const MORE: NavItem[] = [
   { label: "About Us", to: "/", hash: "careers" },
-  { label: "Contact", to: "/", hash: "contact" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export function Header() {
@@ -255,7 +255,7 @@ export function Header() {
                               { label: "Services", to: "/services" },
                               { label: "Careers", to: "/", hash: "careers" },
                               { label: "About Us", to: "/", hash: "careers" },
-                              { label: "Contact", to: "/", hash: "contact" },
+                              { label: "Contact", to: "/contact" },
                             ] as NavItem[]
                           ).map((item, i) => (
                             <motion.div
