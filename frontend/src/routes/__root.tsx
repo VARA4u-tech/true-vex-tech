@@ -29,6 +29,13 @@ export const Route = createRootRoute({
   notFoundComponent: NotFoundComponent,
 });
 
+import SplashCursor from "@/components/ui/SplashCursor";
+
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <>
+      <SplashCursor />
+      <Outlet />
+    </>
+  );
 }
