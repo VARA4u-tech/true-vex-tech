@@ -10,13 +10,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const NAV = [
+type AppRoute = "/" | "/services" | "/career";
+
+interface NavItem {
+  label: string;
+  to: AppRoute;
+  hash?: string;
+}
+
+const NAV: NavItem[] = [
   { label: "Home", to: "/" },
   { label: "Services", to: "/services" },
   { label: "Careers", to: "/", hash: "careers" },
 ];
 
-const MORE = [
+const MORE: NavItem[] = [
   { label: "About Us", to: "/", hash: "careers" },
   { label: "Contact", to: "/", hash: "contact" },
 ];
@@ -54,6 +62,10 @@ export function Header() {
                 key={item.label}
                 to={item.to}
                 hash={"hash" in item ? (item.hash as string) : undefined}
+                activeOptions={{
+                  exact: item.to === "/",
+                  includeHash: "hash" in item || item.to === "/",
+                }}
                 activeProps={{ className: "text-primary font-semibold" }}
                 inactiveProps={{ className: "text-muted-foreground hover:text-primary" }}
                 className="px-4 py-2 text-sm font-medium transition-colors"
@@ -102,8 +114,17 @@ export function Header() {
                           key={item.label}
                           to={item.to}
                           hash={"hash" in item ? (item.hash as string) : undefined}
+                          activeOptions={{
+                            exact: item.to === "/",
+                            includeHash: "hash" in item || item.to === "/",
+                          }}
+                          activeProps={{ className: "bg-primary/10 text-primary" }}
+                          inactiveProps={{
+                            className:
+                              "text-muted-foreground hover:bg-primary/10 hover:text-primary",
+                          }}
                           onClick={() => setDropdownOpen(false)}
-                          className="flex cursor-pointer items-center rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary outline-none"
+                          className="flex cursor-pointer items-center rounded-xl px-4 py-3 text-sm font-medium transition-all outline-none"
                         >
                           {item.label}
                         </Link>
@@ -183,6 +204,8 @@ export function Header() {
                 >
                   <Link
                     to="/"
+                    activeOptions={{ exact: true, includeHash: true }}
+                    activeProps={{ className: "text-primary" }}
                     onClick={() => setOpen(false)}
                     className="flex items-center justify-between text-4xl font-bold tracking-tight text-white transition-colors hover:text-primary"
                   >
@@ -227,12 +250,14 @@ export function Header() {
                         className="overflow-hidden"
                       >
                         <div className="flex flex-col gap-4 py-6 pl-4 border-l-2 border-primary/20 mt-2">
-                          {[
-                            { label: "Services", to: "/services" },
-                            { label: "Careers", to: "/", hash: "careers" },
-                            { label: "About Us", to: "/", hash: "careers" },
-                            { label: "Contact", to: "/", hash: "contact" },
-                          ].map((item, i) => (
+                          {(
+                            [
+                              { label: "Services", to: "/services" },
+                              { label: "Careers", to: "/", hash: "careers" },
+                              { label: "About Us", to: "/", hash: "careers" },
+                              { label: "Contact", to: "/", hash: "contact" },
+                            ] as NavItem[]
+                          ).map((item, i) => (
                             <motion.div
                               key={item.label}
                               initial={{ opacity: 0, x: -10 }}
@@ -242,6 +267,11 @@ export function Header() {
                               <Link
                                 to={item.to}
                                 hash={"hash" in item ? (item.hash as string) : undefined}
+                                activeOptions={{
+                                  exact: item.to === "/",
+                                  includeHash: "hash" in item || item.to === "/",
+                                }}
+                                activeProps={{ className: "text-white" }}
                                 onClick={() => {
                                   setOpen(false);
                                   setCompanyOpen(false);
