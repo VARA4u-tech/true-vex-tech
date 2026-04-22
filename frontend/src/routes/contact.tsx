@@ -42,6 +42,7 @@ function ContactPage() {
     message: "",
   });
 
+  const [socialsActive, setSocialsActive] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSelectOpen, setIsSelectOpen] = useState(false);
@@ -243,13 +244,32 @@ function ContactPage() {
                 transition={{ delay: 0.6 }}
                 className="flex justify-center md:justify-start"
               >
-                <div className="social-interactive-card group relative h-[250px] w-[250px] overflow-hidden rounded-[30px] border-2 border-white/40 bg-[#0A0A0A] shadow-2xl transition-all duration-700 hover:scale-105 hover:border-[#0D7E92]/60">
+                <div
+                  onClick={() => setSocialsActive(!socialsActive)}
+                  className={`social-interactive-card group relative h-[250px] w-[250px] cursor-pointer overflow-hidden rounded-[30px] border-2 shadow-2xl transition-all duration-700 ${
+                    socialsActive
+                      ? "scale-105 border-[#0D7E92]/60 bg-[#0A0A0A]"
+                      : "border-white/40 bg-[#0A0A0A] hover:scale-105 hover:border-[#0D7E92]/60"
+                  }`}
+                >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,#0D7E92,transparent_60%)] opacity-40" />
                   <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#054d5a]/20 to-[#0A0A0A]" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,#0D7E92,transparent_50%)] opacity-20" />
 
-                  <div className="absolute inset-0 flex items-center justify-center transition-all duration-500 group-hover:translate-x-[70px] group-hover:-translate-y-[52px]">
-                    <span className="text-2xl font-bold tracking-[3px] text-white group-hover:tracking-normal group-hover:text-[#0D7E92] transition-colors">
+                  <div
+                    className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
+                      socialsActive
+                        ? "translate-x-[70px] -translate-y-[52px]"
+                        : "group-hover:translate-x-[70px] group-hover:-translate-y-[52px]"
+                    }`}
+                  >
+                    <span
+                      className={`text-2xl font-bold tracking-[3px] transition-colors ${
+                        socialsActive
+                          ? "tracking-normal text-[#0D7E92]"
+                          : "text-white group-hover:tracking-normal group-hover:text-[#0D7E92]"
+                      }`}
+                    >
                       SOCIALS
                     </span>
                   </div>
@@ -258,7 +278,11 @@ function ContactPage() {
                   <a
                     href="https://www.instagram.com/truevextech/"
                     target="_blank"
-                    className="social-box box-1 absolute -bottom-[70%] -left-[70%] h-[70%] w-[70%] overflow-hidden rounded-tr-[42%] border-r border-t-2 border-white/40 bg-white/10 p-4 text-right shadow-lg transition-all duration-700 hover:bg-gradient-to-br hover:from-[#0D7E92] hover:to-[#054d5a] group-hover:bottom-[-1px] group-hover:left-[-1px]"
+                    className={`social-box box-1 absolute h-[70%] w-[70%] overflow-hidden rounded-tr-[42%] border-r border-t-2 border-white/40 bg-white/10 p-4 text-right shadow-lg transition-all duration-700 hover:bg-gradient-to-br hover:from-[#0D7E92] hover:to-[#054d5a] ${
+                      socialsActive
+                        ? "bottom-[-1px] left-[-1px]"
+                        : "-bottom-[70%] -left-[70%] group-hover:bottom-[-1px] group-hover:left-[-1px]"
+                    }`}
                   >
                     <Instagram
                       size={24}
@@ -269,7 +293,11 @@ function ContactPage() {
                   <a
                     href="https://x.com/truevextech"
                     target="_blank"
-                    className="social-box box-2 absolute -bottom-[50%] -left-[50%] h-[50%] w-[50%] overflow-hidden rounded-tr-[42%] border-r border-t-2 border-white/40 bg-white/10 p-4 text-right shadow-lg transition-all duration-700 delay-[0.2s] hover:bg-gradient-to-br hover:from-[#1E293B] hover:to-[#0D7E92] group-hover:bottom-[-1px] group-hover:left-[-1px]"
+                    className={`social-box box-2 absolute h-[50%] w-[50%] overflow-hidden rounded-tr-[42%] border-r border-t-2 border-white/40 bg-white/10 p-4 text-right shadow-lg transition-all duration-700 delay-[0.2s] hover:bg-gradient-to-br hover:from-[#1E293B] hover:to-[#0D7E92] ${
+                      socialsActive
+                        ? "bottom-[-1px] left-[-1px]"
+                        : "-bottom-[50%] -left-[50%] group-hover:bottom-[-1px] group-hover:left-[-1px]"
+                    }`}
                   >
                     <Twitter
                       size={20}
@@ -280,7 +308,11 @@ function ContactPage() {
                   <a
                     href="https://www.facebook.com/profile.php?id=61585918391755"
                     target="_blank"
-                    className="social-box box-3 absolute -bottom-[30%] -left-[30%] h-[30%] w-[30%] overflow-hidden rounded-tr-[42%] border-r border-t-2 border-white/40 bg-white/10 p-3 text-right shadow-lg transition-all duration-700 delay-[0.4s] hover:bg-gradient-to-br hover:from-[#0f172a] hover:to-[#0D7E92]/50 group-hover:bottom-[-1px] group-hover:left-[-1px]"
+                    className={`social-box box-3 absolute h-[30%] w-[30%] overflow-hidden rounded-tr-[42%] border-r border-t-2 border-white/40 bg-white/10 p-3 text-right shadow-lg transition-all duration-700 delay-[0.4s] hover:bg-gradient-to-br hover:from-[#0f172a] hover:to-[#0D7E92]/50 ${
+                      socialsActive
+                        ? "bottom-[-1px] left-[-1px]"
+                        : "-bottom-[30%] -left-[30%] group-hover:bottom-[-1px] group-hover:left-[-1px]"
+                    }`}
                   >
                     <Facebook
                       size={16}
@@ -291,7 +323,11 @@ function ContactPage() {
                   <a
                     href="https://www.linkedin.com/company/truevex-technologies-pvt-ltd/"
                     target="_blank"
-                    className="social-box box-4 absolute -bottom-[15%] -left-[15%] h-[15%] w-[15%] overflow-hidden rounded-tr-[42%] border-r border-t-2 border-white/40 bg-white/10 p-2 text-right shadow-lg transition-all duration-700 delay-[0.6s] hover:bg-[#0D7E92] group-hover:bottom-[-1px] group-hover:left-[-1px]"
+                    className={`social-box box-4 absolute h-[15%] w-[15%] overflow-hidden rounded-tr-[42%] border-r border-t-2 border-white/40 bg-white/10 p-2 text-right shadow-lg transition-all duration-700 delay-[0.6s] hover:bg-[#0D7E92] ${
+                      socialsActive
+                        ? "bottom-[-1px] left-[-1px]"
+                        : "-bottom-[15%] -left-[15%] group-hover:bottom-[-1px] group-hover:left-[-1px]"
+                    }`}
                   >
                     <Linkedin
                       size={12}
