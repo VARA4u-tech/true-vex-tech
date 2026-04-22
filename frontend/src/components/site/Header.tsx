@@ -42,6 +42,18 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [open]);
+
   return (
     <header
       className={`fixed inset-x-0 top-3 z-50 transition-all duration-500 px-4 md:top-4 md:px-5`}
@@ -165,8 +177,14 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-[60] flex flex-col bg-background/95 backdrop-blur-2xl lg:hidden"
+            className="fixed inset-0 z-[60] flex flex-col bg-background/95 backdrop-blur-2xl lg:hidden overflow-y-auto no-scrollbar"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
+            <style
+              dangerouslySetInnerHTML={{
+                __html: ".no-scrollbar::-webkit-scrollbar { display: none; }",
+              }}
+            />
             {/* Mobile Header Top Bar */}
             <div className="flex h-20 items-center justify-between px-8">
               <Logo />
