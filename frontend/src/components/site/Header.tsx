@@ -13,7 +13,7 @@ import {
 const NAV = [
   { label: "Home", to: "/" },
   { label: "Services", to: "/services" },
-  { label: "Careers", to: "/career" },
+  { label: "Careers", to: "/", hash: "careers" },
 ];
 
 const MORE = [
@@ -227,7 +227,7 @@ export function Header() {
                         <div className="flex flex-col gap-4 py-6 pl-4 border-l-2 border-primary/20 mt-2">
                           {[
                             { label: "Services", to: "/services" },
-                            { label: "Careers", to: "/career" },
+                            { label: "Careers", to: "/", hash: "careers" },
                             { label: "About Us", to: "#" },
                             { label: "Contact", to: "#contact" },
                           ].map((item, i) => (
@@ -239,6 +239,7 @@ export function Header() {
                             >
                               <Link
                                 to={item.to}
+                                hash={"hash" in item ? (item.hash as string) : undefined}
                                 onClick={() => {
                                   setOpen(false);
                                   setCompanyOpen(false);

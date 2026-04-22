@@ -65,12 +65,13 @@ export function Footer() {
                     { label: "About Us", to: "#" },
                     { label: "Our Approach", to: "#" },
                     { label: "Success Stories", to: "#" },
-                    { label: "Careers", to: "/career" },
+                    { label: "Careers", to: "/", hash: "careers" },
                     { label: "Contact", to: "#contact" },
                   ].map((l) => (
                     <li key={l.label}>
                       <Link
                         to={l.to}
+                        hash={l.hash}
                         className="group relative inline-block text-sm text-gray-400 transition-colors hover:text-white"
                       >
                         {l.label}
