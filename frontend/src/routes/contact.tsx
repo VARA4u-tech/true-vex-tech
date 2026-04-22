@@ -326,7 +326,7 @@ function ContactPage() {
                               ? "border-red-500/50 focus:border-red-500"
                               : "border-white/40 focus:border-primary"
                           }`}
-                          placeholder="John Doe"
+                          placeholder=" Enter Your Name"
                           value={formState.name}
                           onBlur={() => handleBlur("name")}
                           onChange={(e) => handleChange("name", e.target.value)}
@@ -378,7 +378,7 @@ function ContactPage() {
                               ? "border-red-500/50 focus:border-red-500"
                               : "border-white/40 focus:border-primary"
                           }`}
-                          placeholder="john@example.com"
+                          placeholder=" Enter Your Email"
                           value={formState.email}
                           onBlur={() => handleBlur("email")}
                           onChange={(e) => handleChange("email", e.target.value)}
@@ -415,7 +415,7 @@ function ContactPage() {
                               ? "border-red-500/50 focus:border-red-500"
                               : "border-white/40 focus:border-primary"
                           }`}
-                          placeholder="+91 00000 00000"
+                          placeholder=" Enter Your Phone Number"
                           value={formState.phone}
                           onBlur={() => handleBlur("phone")}
                           onChange={(e) => handleChange("phone", e.target.value)}
